@@ -58,7 +58,7 @@
 /* ---- 赛博数据 ---- */
 .font-data{font-family:'Share Tech Mono','DotGothic16',monospace}
 
-/* ---- 基础重置 ---- */
+/* ---- 经典暗色主题 ---- */
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei','PingFang SC',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;font-size:16px;letter-spacing:0.03em;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .font-pixel body{-webkit-font-smoothing:none}
@@ -137,7 +137,6 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
 .era-node .era-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,210,0,0.2);background:#1a1a2e;transition:all 0.3s}
 .era-node .era-year{font-size:0.7rem;color:#666;transition:color 0.3s;font-weight:600}
 .era-node .era-name{font-size:0.78rem;font-weight:600;color:#666;transition:color 0.3s}
-/* 年代专用字体 */
 .era-node.era-retro .era-year{font-family:'PixelMplus12','Noto Serif SC','DotGothic16',monospace;letter-spacing:1px}
 .era-node.era-retro .era-name{font-family:'PixelMplus12','Noto Serif SC','DotGothic16',monospace;letter-spacing:1px}
 .era-node.era-modern .era-year{font-family:'DotGothic16','Microsoft YaHei',sans-serif}
@@ -161,16 +160,16 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
 #xp-bar{height:100%;background:linear-gradient(90deg,#ffd200,#ff6a00);border-radius:2px;transition:width 0.4s;width:0%}
 #question-box{background:#111128;border:1px solid rgba(255,210,0,0.15);border-radius:12px;padding:18px;margin-bottom:14px}
 #question-text{font-family:'ZCOOL QingKe HuangYou','DotGothic16','Microsoft YaHei',cursive;font-size:1rem;line-height:1.8;margin-bottom:14px;letter-spacing:0.02em}
-/* 时代切换 → 题目字体变化 */
+/* 时代切换 → 题目字体 */
 #game-area.era-retro #question-text{font-family:'Noto Serif SC','ZCOOL QingKe HuangYou','DotGothic16',serif;font-size:0.95rem}
 #game-area.era-modern #question-text{font-family:'DotGothic16','Microsoft YaHei',sans-serif;font-size:0.95rem}
 #game-area.era-cyber #question-text{font-family:'Share Tech Mono','DotGothic16',monospace;font-size:0.92rem;letter-spacing:0.04em}
-/* 时代切换 → 场景叙述字体 */
+/* 时代切换 → 场景字体 */
 #game-area.era-retro .era-scenario{font-family:'Noto Serif SC','ZCOOL QingKe HuangYou',serif}
 #game-area.era-modern .era-scenario{font-family:'DotGothic16','Microsoft YaHei',sans-serif}
 #game-area.era-cyber .era-scenario{font-family:'Share Tech Mono','DotGothic16',monospace;letter-spacing:0.03em}
 #game-area.era-cyber .era-scenario strong{color:#22d3ee}
-/* 时代切换 → 科目标签 */
+/* 时代切换 → 标签字体 */
 #game-area.era-retro #subject-label{font-family:'PixelMplus12','Noto Serif SC','DotGothic16',monospace}
 #game-area.era-cyber #subject-label{font-family:'Orbitron','Share Tech Mono',monospace;letter-spacing:2px}
 #options-grid{display:flex;flex-direction:column;gap:8px}
@@ -287,16 +286,14 @@ var ERA_FONT_CLASSES = ['era-retro','era-modern','era-cyber'];
 function applyEraFont(eraIdx) {
   var ga = document.getElementById('game-area');
   if (!ga) return;
-  // 清除所有时代字体类
   ga.classList.remove('era-retro','era-modern','era-cyber');
-  // 添加当前时代类
   if (eraIdx >= 0 && eraIdx < ERA_FONT_CLASSES.length) {
     ga.classList.add(ERA_FONT_CLASSES[eraIdx]);
   }
 }
 
 // --- 学段选择 ---
-var selectedGrade = 0; // 0=未选择，1=高一，2=高二，3=高三
+var selectedGrade = 0;
 
 function selectGrade(btn, grade) {
   if (selectedGrade === grade) return;
@@ -315,7 +312,7 @@ var CAREER_CONFIG = {
   engineer:   { name:'🔧 工程师', desc:'数学 + 物理', icon:'🔧', cls:'card-engineer' }
 };
 
-// --- 游戏状态（新：等级由分数直接推算） ---
+// --- 游戏状态 ---
 var GameState = { score: 0 };
 function getLevel(score) { return Math.floor(score / 50) + 1; }
 function getLevelProgress(score) { return (score % 50) / 50; }
@@ -352,41 +349,21 @@ function showResult(name, level, score) {
 </script>
 
 <!-- ============================================================
-     records.js — 答题记录 & 错题本 (localStorage)
+     records.js — 答题记录 & 错题本
      ============================================================ -->
 <script>
 var STORAGE_KEY = 'lifeSimulator_records';
 
-/* ========== 存储操作 ========== */
 function saveRecord(record) {
   var all = loadAllRecords();
   record.timestamp = Date.now();
   all.push(record);
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  } catch(e) {
-    if (e.name === 'QuotaExceededError') {
-      all = all.slice(-200);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-    }
-  }
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(all)); }
+  catch(e) { if (e.name === 'QuotaExceededError') { all = all.slice(-200); localStorage.setItem(STORAGE_KEY, JSON.stringify(all)); } }
 }
-
-function loadAllRecords() {
-  try {
-    var data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
-  } catch(e) { return []; }
-}
-
-function getRecordsByProfession(professionId) {
-  return loadAllRecords().filter(function(r) { return r.professionId === professionId; });
-}
-
-function getWrongRecords() {
-  return loadAllRecords().filter(function(r) { return !r.correct; });
-}
-
+function loadAllRecords() { try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : []; } catch(e) { return []; } }
+function getRecordsByProfession(professionId) { return loadAllRecords().filter(function(r) { return r.professionId === professionId; }); }
+function getWrongRecords() { return loadAllRecords().filter(function(r) { return !r.correct; }); }
 function getStats() {
   var all = loadAllRecords();
   var total = all.length;
@@ -396,156 +373,74 @@ function getStats() {
   var totalPoints = all.reduce(function(s, r) { return s + (r.pointEarned || 0); }, 0);
   return { total: total, correct: correct, wrong: wrong, partial: partial, totalPoints: totalPoints };
 }
+function clearRecords() { localStorage.removeItem(STORAGE_KEY); }
 
-function clearRecords() {
-  localStorage.removeItem(STORAGE_KEY);
-}
-
-/* ========== UI: 错题本窗口 ========== */
 function showRecordsWindow() {
   var overlay = document.getElementById('records-overlay');
   if (overlay) { overlay.style.display = 'flex'; return; }
-
-  var html = '';
-  html += '<div id="records-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;' +
-    'background:rgba(0,0,0,0.88);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;' +
-    'padding:20px;overflow-y:auto;">';
-
-  html += '<div style="width:100%;max-width:600px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
-  html += '<h2 style="color:#FFD700;font-size:18px;">📖 知识宝典 · 错题本</h2>';
-  html += '<button onclick="closeRecordsWindow()" style="font-size:18px;background:none;border:none;color:#fff;cursor:pointer;padding:4px 10px;">✕</button>';
-  html += '</div>';
-
+  var html = '<div id="records-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;background:rgba(0,0,0,0.88);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;overflow-y:auto;">';
+  html += '<div style="width:100%;max-width:600px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h2 style="color:#FFD700;font-size:18px;">📖 知识宝典 · 错题本</h2><button onclick="closeRecordsWindow()" style="font-size:18px;background:none;border:none;color:#fff;cursor:pointer;padding:4px 10px;">✕</button></div>';
   var stats = getStats();
   html += '<div style="width:100%;max-width:600px;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;color:#fff;font-size:13px;">';
   html += '<span style="background:rgba(255,255,255,0.1);padding:6px 12px;border-radius:6px;">📝 共 ' + stats.total + ' 题</span>';
   html += '<span style="background:rgba(46,204,113,0.2);padding:6px 12px;border-radius:6px;color:#2ecc71;">✅ ' + stats.correct + '</span>';
   html += '<span style="background:rgba(241,196,15,0.2);padding:6px 12px;border-radius:6px;color:#f1c40f;">⚠ ' + stats.partial + '</span>';
   html += '<span style="background:rgba(231,76,60,0.2);padding:6px 12px;border-radius:6px;color:#e74c3c;">❌ ' + stats.wrong + '</span>';
-  html += '<span style="background:rgba(255,215,0,0.2);padding:6px 12px;border-radius:6px;color:#FFD700;">⭐ ' + stats.totalPoints + '</span>';
-  html += '</div>';
-
+  html += '<span style="background:rgba(255,215,0,0.2);padding:6px 12px;border-radius:6px;color:#FFD700;">⭐ ' + stats.totalPoints + '</span></div>';
   html += '<div style="width:100%;max-width:600px;display:flex;gap:6px;margin-bottom:10px;">';
   html += '<button onclick="filterRecords(\'all\')" id="filter-all" class="rf-btn" style="background:#3498db;">全部</button>';
   html += '<button onclick="filterRecords(\'correct\')" id="filter-correct" class="rf-btn" style="background:#2ecc71;">正确</button>';
   html += '<button onclick="filterRecords(\'wrong\')" id="filter-wrong" class="rf-btn" style="background:#e74c3c;">错误/部分</button>';
-  html += '<button onclick="clearRecords();closeRecordsWindow()" style="margin-left:auto;padding:5px 12px;font-size:12px;background:rgba(255,255,255,0.1);border:1px solid #555;border-radius:4px;color:#aaa;cursor:pointer;">清空</button>';
-  html += '</div>';
-
-  html += '<div id="records-list" style="width:100%;max-width:600px;"></div>';
-  html += '</div>';
-
+  html += '<button onclick="clearRecords();closeRecordsWindow()" style="margin-left:auto;padding:5px 12px;font-size:12px;background:rgba(255,255,255,0.1);border:1px solid #555;border-radius:4px;color:#aaa;cursor:pointer;">清空</button></div>';
+  html += '<div id="records-list" style="width:100%;max-width:600px;"></div></div>';
   document.body.insertAdjacentHTML('beforeend', html);
   filterRecords('wrong');
 }
+function closeRecordsWindow() { var overlay = document.getElementById('records-overlay'); if (overlay) overlay.style.display = 'none'; }
 
-function closeRecordsWindow() {
-  var overlay = document.getElementById('records-overlay');
-  if (overlay) overlay.style.display = 'none';
-}
-
-/* ========== 知识卡片独立弹窗 ========== */
 function showKnowledgeCard(record) {
-  var existing = document.getElementById('knowledge-card-popup');
-  if (existing) existing.remove();
-
+  var existing = document.getElementById('knowledge-card-popup'); if (existing) existing.remove();
   var correctLetters = record.correctAns.map(function(i) { return String.fromCharCode(65 + i); }).join(', ');
   var userLetters = record.userAns.map(function(i) { return String.fromCharCode(65 + i); }).join(', ');
   var isCorrect = record.correct;
   var borderColor = isCorrect ? '#2ecc71' : (record.partial ? '#f1c40f' : '#e74c3c');
   var statusText = isCorrect ? '✅ 回答正确' : (record.partial ? '⚠ 部分正确' : '❌ 回答错误');
-
-  var html = '';
-  html += '<div id="knowledge-card-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;' +
-    'background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;animation:kcFadeIn 0.2s ease;">';
-
-  html += '<div style="width:90%;max-width:520px;background:#1a1a2e;border:2px solid ' + borderColor + ';' +
-    'border-radius:12px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,0.5);position:relative;">';
-
-  html += '<button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:8px;right:12px;' +
-    'font-size:16px;background:none;border:none;color:#888;cursor:pointer;">✕</button>';
-
+  var html = '<div id="knowledge-card-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;animation:kcFadeIn 0.2s ease;">';
+  html += '<div style="width:90%;max-width:520px;background:#1a1a2e;border:2px solid ' + borderColor + ';border-radius:12px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,0.5);position:relative;">';
+  html += '<button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:8px;right:12px;font-size:16px;background:none;border:none;color:#888;cursor:pointer;">✕</button>';
   html += '<div style="font-size:14px;color:' + borderColor + ';margin-bottom:10px;font-weight:700;">📖 知识卡片</div>';
-
-  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
-  html += '<span style="font-size:12px;color:' + borderColor + ';">' + statusText + ' +' + record.pointEarned + '分</span>';
-  html += '<span style="font-size:11px;color:#888;">' + (record.subject || '综合') + '</span>';
-  html += '</div>';
-
-  html += '<div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:10px 12px;margin-bottom:10px;">';
-  html += '<div style="font-size:13px;color:#ddd;line-height:1.7;">' + record.text + '</div>';
-  html += '</div>';
-
-  html += '<div style="display:flex;gap:10px;margin-bottom:10px;font-size:12px;">';
-  html += '<div style="flex:1;background:rgba(231,76,60,0.1);border-radius:6px;padding:6px 10px;">';
-  html += '<div style="color:#e74c3c;margin-bottom:2px;">你的答案</div>';
-  html += '<div style="color:#ddd;">' + userLetters + '</div></div>';
-  html += '<div style="flex:1;background:rgba(46,204,113,0.1);border-radius:6px;padding:6px 10px;">';
-  html += '<div style="color:#2ecc71;margin-bottom:2px;">正确答案</div>';
-  html += '<div style="color:#ddd;">' + correctLetters + '</div></div>';
-  html += '</div>';
-
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;color:' + borderColor + ';">' + statusText + ' +' + record.pointEarned + '分</span><span style="font-size:11px;color:#888;">' + (record.subject || '综合') + '</span></div>';
+  html += '<div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:10px 12px;margin-bottom:10px;"><div style="font-size:13px;color:#ddd;line-height:1.7;">' + record.text + '</div></div>';
+  html += '<div style="display:flex;gap:10px;margin-bottom:10px;font-size:12px;"><div style="flex:1;background:rgba(231,76,60,0.1);border-radius:6px;padding:6px 10px;"><div style="color:#e74c3c;margin-bottom:2px;">你的答案</div><div style="color:#ddd;">' + userLetters + '</div></div><div style="flex:1;background:rgba(46,204,113,0.1);border-radius:6px;padding:6px 10px;"><div style="color:#2ecc71;margin-bottom:2px;">正确答案</div><div style="color:#ddd;">' + correctLetters + '</div></div></div>';
   if (record.choices && record.choices.length > 0) {
-    html += '<div style="margin-bottom:10px;">';
-    html += '<div style="font-size:12px;color:#aaa;margin-bottom:4px;">全部选项：</div>';
+    html += '<div style="margin-bottom:10px;"><div style="font-size:12px;color:#aaa;margin-bottom:4px;">全部选项：</div>';
     record.choices.forEach(function(c, i) {
       var letter = String.fromCharCode(65 + i);
       var isUser = record.userAns.indexOf(i) !== -1;
       var isCorr = c.correct;
       var bg = isCorr ? 'rgba(46,204,113,0.12)' : (isUser && !isCorr ? 'rgba(231,76,60,0.12)' : 'transparent');
       var border = isCorr ? '1px solid rgba(46,204,113,0.3)' : (isUser ? '1px solid rgba(231,76,60,0.3)' : '1px solid transparent');
-      var label = '';
-      if (isCorr && isUser) label = ' ✅';
-      else if (isCorr) label = ' ✓';
-      else if (isUser) label = ' ✗';
-      html += '<div style="display:flex;align-items:flex-start;gap:4px;padding:3px 6px;margin:2px 0;border-radius:4px;background:' + bg + ';border:' + border + ';">';
-      html += '<span style="color:' + (isCorr ? '#2ecc71' : (isUser ? '#e74c3c' : '#888')) + ';font-size:12px;white-space:nowrap;">' + letter + '.</span>';
-      html += '<span style="font-size:12px;color:#ccc;">' + c.text + '</span>';
-      html += '<span style="font-size:11px;color:' + (isCorr ? '#2ecc71' : '#e74c3c') + ';white-space:nowrap;">' + label + '</span>';
-      html += '</div>';
+      var label = ''; if (isCorr && isUser) label = ' ✅'; else if (isCorr) label = ' ✓'; else if (isUser) label = ' ✗';
+      html += '<div style="display:flex;align-items:flex-start;gap:4px;padding:3px 6px;margin:2px 0;border-radius:4px;background:' + bg + ';border:' + border + ';"><span style="color:' + (isCorr ? '#2ecc71' : (isUser ? '#e74c3c' : '#888')) + ';font-size:12px;white-space:nowrap;">' + letter + '.</span><span style="font-size:12px;color:#ccc;">' + c.text + '</span><span style="font-size:11px;color:' + (isCorr ? '#2ecc71' : '#e74c3c') + ';white-space:nowrap;">' + label + '</span></div>';
     });
     html += '</div>';
   }
-
   if (record.knowledgeArr && record.knowledgeArr.length > 0) {
-    html += '<div style="background:rgba(255,215,0,0.06);border-left:3px solid #FFD700;border-radius:0 6px 6px 0;padding:8px 12px;">';
-    html += '<div style="font-size:12px;color:#FFD700;margin-bottom:4px;">📚 知识点解析</div>';
-    record.knowledgeArr.forEach(function(k) {
-      html += '<div style="font-size:12px;color:#ddd;line-height:1.6;margin-bottom:4px;">' + k + '</div>';
-    });
+    html += '<div style="background:rgba(255,215,0,0.06);border-left:3px solid #FFD700;border-radius:0 6px 6px 0;padding:8px 12px;"><div style="font-size:12px;color:#FFD700;margin-bottom:4px;">📚 知识点解析</div>';
+    record.knowledgeArr.forEach(function(k) { html += '<div style="font-size:12px;color:#ddd;line-height:1.6;margin-bottom:4px;">' + k + '</div>'; });
     html += '</div>';
   }
-
   html += '</div></div>';
   document.body.insertAdjacentHTML('beforeend', html);
 }
 
-/* ========== 错题重做（适配 game-logic2） ========== */
 function retryWrongRecord(timestamp) {
-  var all = loadAllRecords();
-  var record = null;
-  for (var i = 0; i < all.length; i++) {
-    if (all[i].timestamp === timestamp) { record = all[i]; break; }
-  }
+  var all = loadAllRecords(); var record = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].timestamp === timestamp) { record = all[i]; break; } }
   if (!record || !record.choices || record.choices.length === 0) return;
-
   closeRecordsWindow();
-
-  // 构造题目对象
-  var q = {
-    text: record.text,
-    subject: record.subject || '',
-    choices: record.choices.map(function(c) {
-      return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' };
-    })
-  };
-
-  // 重置答题状态
-  currentQ = q;
-  answered = false;
-  selected = [];
-
-  // 回到游戏区
+  var q = { text: record.text, subject: record.subject || '', choices: record.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }) };
+  currentQ = q; answered = false; selected = [];
   document.getElementById('result-area').style.display = 'none';
   document.getElementById('game-area').style.display = 'block';
   setSubjectLabel('🔁 错题重做 · ' + (record.subject || ''));
@@ -553,122 +448,62 @@ function retryWrongRecord(timestamp) {
   document.getElementById('question-feedback').innerHTML = '';
   document.getElementById('btn-next').disabled = true;
   document.getElementById('options-grid').innerHTML = '';
-
-  // 用 game-logic2 的渲染
   renderChoices(q);
 }
 
-/* ========== 筛选记录列表 ========== */
 function filterRecords(type) {
   var all = loadAllRecords();
-  var filtered;
-  if (type === 'correct') filtered = all.filter(function(r) { return r.correct; });
-  else if (type === 'wrong') filtered = all.filter(function(r) { return !r.correct; });
-  else filtered = all;
-
-  var list = document.getElementById('records-list');
-  if (!list) return;
-
-  if (filtered.length === 0) {
-    list.innerHTML = '<div style="color:#aaa;text-align:center;padding:30px;font-size:14px;">暂无记录</div>';
-    return;
-  }
-
+  var filtered = type === 'correct' ? all.filter(function(r) { return r.correct; }) : type === 'wrong' ? all.filter(function(r) { return !r.correct; }) : all;
+  var list = document.getElementById('records-list'); if (!list) return;
+  if (filtered.length === 0) { list.innerHTML = '<div style="color:#aaa;text-align:center;padding:30px;font-size:14px;">暂无记录</div>'; return; }
   var html = '';
   filtered.slice().reverse().forEach(function(r) {
     var icon = r.correct ? '✅' : (r.partial ? '⚠' : '❌');
     var color = r.correct ? '#2ecc71' : (r.partial ? '#f1c40f' : '#e74c3c');
     var correctLetters = (r.correctAns || []).map(function(i) { return String.fromCharCode(65 + i); }).join(', ');
     var userLetters = (r.userAns || []).map(function(i) { return String.fromCharCode(65 + i); }).join(', ');
-
-    // 转义题目中的单引号（用于 onclick）
     var escapedText = (r.text || '').slice(0, 60).replace(/'/g, "\\'");
-    var escapedSubject = (r.subject || '').replace(/'/g, "\\'");
-
-    html += '<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;' +
-      'padding:10px 14px;margin-bottom:8px;color:#fff;">';
-
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
-    html += '<span style="color:' + color + ';font-size:12px;">' + icon + ' [' + (r.subject || '') + '] +' + (r.pointEarned || 0) + '分</span>';
-    html += '<span style="color:#666;font-size:11px;">' + new Date(r.timestamp).toLocaleString('zh-CN') + '</span>';
-    html += '</div>';
-
-    html += '<div style="font-size:12px;color:#ddd;margin-bottom:4px;line-height:1.5;">' +
-      (r.text || '').slice(0, 60) + ((r.text || '').length > 60 ? '…' : '') + '</div>';
-
+    html += '<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;margin-bottom:8px;color:#fff;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="color:' + color + ';font-size:12px;">' + icon + ' [' + (r.subject || '') + '] +' + (r.pointEarned || 0) + '分</span><span style="color:#666;font-size:11px;">' + new Date(r.timestamp).toLocaleString('zh-CN') + '</span></div>';
+    html += '<div style="font-size:12px;color:#ddd;margin-bottom:4px;line-height:1.5;">' + (r.text || '').slice(0, 60) + ((r.text || '').length > 60 ? '…' : '') + '</div>';
     html += '<div style="font-size:11px;color:#aaa;">你选：' + userLetters + ' | 正确：' + correctLetters + '</div>';
-
     html += '<div style="display:flex;gap:4px;margin-top:5px;">';
-    html += '<button onclick="showKnowledgeCard(loadRecordByTs(' + r.timestamp + '))" ' +
-      'style="padding:3px 10px;font-size:12px;background:rgba(255,215,0,0.15);' +
-      'border:1px solid rgba(255,215,0,0.3);border-radius:4px;color:#FFD700;cursor:pointer;">📖 知识卡片</button>';
-    if (!r.correct && r.choices && r.choices.length > 0) {
-      html += '<button onclick="retryWrongRecord(' + r.timestamp + ')" ' +
-        'style="padding:3px 10px;font-size:12px;background:rgba(52,152,219,0.15);' +
-        'border:1px solid rgba(52,152,219,0.3);border-radius:4px;color:#3498db;cursor:pointer;">🔁 重做</button>';
-    }
-    html += '</div>';
-    html += '</div>';
+    html += '<button onclick="showKnowledgeCard(loadRecordByTs(' + r.timestamp + '))" style="padding:3px 10px;font-size:12px;background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.3);border-radius:4px;color:#FFD700;cursor:pointer;">📖 知识卡片</button>';
+    if (!r.correct && r.choices && r.choices.length > 0) html += '<button onclick="retryWrongRecord(' + r.timestamp + ')" style="padding:3px 10px;font-size:12px;background:rgba(52,152,219,0.15);border:1px solid rgba(52,152,219,0.3);border-radius:4px;color:#3498db;cursor:pointer;">🔁 重做</button>';
+    html += '</div></div>';
   });
-
   list.innerHTML = html;
 }
-
-/* 根据 timestamp 查找单条记录（用于 knowledge card） */
-function loadRecordByTs(ts) {
-  var all = loadAllRecords();
-  for (var i = 0; i < all.length; i++) {
-    if (all[i].timestamp === ts) return all[i];
-  }
-  return null;
-}
+function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < all.length; i++) { if (all[i].timestamp === ts) return all[i]; } return null; }
 </script>
 
 <!-- ============================================================
-     game-logic2.js — 全职业回合制游戏逻辑
+     game-logic2.js
      ============================================================ -->
 <script src="game-logic2.js"></script>
 
 <!-- ============================================================
-     整合层：将 records.js 的 saveRecord 接入答题流程
+     整合层
      ============================================================ -->
 <script>
-/* ---- 包装 checkAnswer —— 每次选择题提交后自动保存记录 ---- */
 (function() {
   var _origCheck = checkAnswer;
   checkAnswer = function(q, singleBtn) {
     var userSel = selected.slice();
     _origCheck(q, singleBtn);
-
     var correctIdx = [];
     q.choices.forEach(function(c, i) { if (c.correct) correctIdx.push(i); });
-    var allCorrect = userSel.length === correctIdx.length &&
-      correctIdx.every(function(ci) { return userSel.indexOf(ci) !== -1; });
+    var allCorrect = userSel.length === correctIdx.length && correctIdx.every(function(ci) { return userSel.indexOf(ci) !== -1; });
     var hasWrong = userSel.some(function(si) { return correctIdx.indexOf(si) === -1; });
     var gotSome = userSel.some(function(si) { return correctIdx.indexOf(si) !== -1; });
     var partial = gotSome && !allCorrect && !hasWrong;
-    var point = allCorrect ? 10 : (partial ? 3 : 0);
+    var point = allCorrect ? 10 : (partial ? 5 : 0);
     var knowledgeArr = [];
     q.choices.forEach(function(c) { if (c.correct && c.knowledge) knowledgeArr.push(c.knowledge); });
-
-    saveRecord({
-      professionId: CareerKey,
-      eraId: ERA_KEYS[curRound],
-      round: curRound + 1,
-      subject: q.subject || '',
-      text: q.text,
-      correct: allCorrect,
-      partial: partial,
-      pointEarned: point,
-      userAns: userSel,
-      correctAns: correctIdx.slice(),
-      choices: q.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }),
-      knowledgeArr: knowledgeArr
-    });
+    saveRecord({ professionId: CareerKey, eraId: ERA_KEYS[curRound], round: curRound + 1, subject: q.subject || '', text: q.text, correct: allCorrect, partial: partial, pointEarned: point, userAns: userSel, correctAns: correctIdx.slice(), choices: q.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }), knowledgeArr: knowledgeArr });
   };
 })();
 
-/* ---- 包装 submitFill —— 每次填空题提交后自动保存记录 ---- */
 (function() {
   var _origSubmit = submitFill;
   submitFill = function(q, userAnswer) {
@@ -677,40 +512,17 @@ function loadRecordByTs(ts) {
     if (!wasAnswered && answered && userAnswer) {
       var acceptable = q.answers || [q.answer];
       var isCorrect = false;
-      for (var i = 0; i < acceptable.length; i++) {
-        if (userAnswer.toLowerCase().replace(/\s/g, '') === acceptable[i].toLowerCase().replace(/\s/g, '')) {
-          isCorrect = true; break;
-        }
-      }
-      saveRecord({
-        professionId: CareerKey,
-        eraId: ERA_KEYS[curRound],
-        round: curRound + 1,
-        subject: q.subject || '',
-        text: q.text,
-        correct: isCorrect,
-        partial: false,
-        pointEarned: isCorrect ? 5 : 0,
-        userAns: [userAnswer],
-        correctAns: [q.answer],
-        choices: [],
-        knowledgeArr: q.knowledge ? [q.knowledge] : []
-      });
+      for (var i = 0; i < acceptable.length; i++) { if (userAnswer.toLowerCase().replace(/\s/g, '') === acceptable[i].toLowerCase().replace(/\s/g, '')) { isCorrect = true; break; } }
+      saveRecord({ professionId: CareerKey, eraId: ERA_KEYS[curRound], round: curRound + 1, subject: q.subject || '', text: q.text, correct: isCorrect, partial: false, pointEarned: isCorrect ? 5 : 0, userAns: [userAnswer], correctAns: [q.answer], choices: [], knowledgeArr: q.knowledge ? [q.knowledge] : [] });
     }
   };
 })();
 
-/* ---- UI 初始化（在所有文件加载完毕后执行） ---- */
 (function() {
   var html = '';
   for (var k in CAREER_CONFIG) {
     var c = CAREER_CONFIG[k];
-    html += '<div class="card ' + c.cls + '" data-key="' + k + '">' +
-      '<div class="card-icon">' + c.icon + '</div>' +
-      '<div class="info">' +
-      '<div class="name">' + c.name + '</div>' +
-      '<div class="desc">' + c.desc + '</div>' +
-      '</div></div>';
+    html += '<div class="card ' + c.cls + '" data-key="' + k + '"><div class="card-icon">' + c.icon + '</div><div class="info"><div class="name">' + c.name + '</div><div class="desc">' + c.desc + '</div></div></div>';
   }
   document.getElementById('career-cards').innerHTML = html;
 
@@ -719,32 +531,18 @@ function loadRecordByTs(ts) {
     card.addEventListener('click', function() {
       try {
         var key = card.getAttribute('data-key');
-        console.log('[DEBUG] 选择了职业:', key);
         document.getElementById('career-select').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
         document.getElementById('result-area').style.display = 'none';
         GameState = { score:0 };
         updateExpBar();
         updateStatsDisplay();
-        if (typeof onCareerSelected === 'function') {
-          console.log('[DEBUG] 调用 onCareerSelected...');
-          onCareerSelected(key);
-          console.log('[DEBUG] onCareerSelected 调用完成');
-        } else {
-          console.error('[ERROR] onCareerSelected 函数未定义！game-logic2.js 可能未正确加载！');
-          alert('游戏逻辑文件加载失败！请检查 game-logic2.js 文件是否存在且无语法错误。');
-        }
-      } catch(e) {
-        console.error('[ERROR] 初始化游戏时发生错误:', e.message, e.stack);
-        alert('游戏启动失败：' + e.message + '\n请打开浏览器控制台查看详情。');
-      }
+        if (typeof onCareerSelected === 'function') onCareerSelected(key);
+      } catch(e) { console.error('[ERROR]', e.message); alert('游戏启动失败：' + e.message); }
     });
   });
 
-  document.getElementById('btn-next').addEventListener('click', function() {
-    if (typeof onNextQuestion === 'function') onNextQuestion();
-  });
-
+  document.getElementById('btn-next').addEventListener('click', function() { if (typeof onNextQuestion === 'function') onNextQuestion(); });
   document.getElementById('btn-restart').addEventListener('click', function() {
     document.getElementById('result-area').style.display = 'none';
     document.getElementById('game-area').style.display = 'none';
@@ -752,7 +550,6 @@ function loadRecordByTs(ts) {
   });
 })();
 
-/* 一键返回开始界面 */
 function goBackToCareer() {
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('result-area').style.display = 'none';
