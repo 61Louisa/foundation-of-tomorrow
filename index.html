@@ -77,9 +77,9 @@
 
 /* ---- 水印（底部） ---- */
 #watermark{position:fixed;bottom:4px;left:0;width:100%;
-  font-size:0.55rem;color:rgba(255,255,255,0.1);letter-spacing:0.5px;
+  font-size:0.6rem;color:rgba(100,180,255,0.35);letter-spacing:1px;
   pointer-events:none;z-index:999;font-family:'DotGothic16','Microsoft YaHei',sans-serif;
-  line-height:1.4;user-select:none;text-align:center}
+  line-height:1.5;user-select:none;text-align:center}
 
 /* ---- 经典暗色主题 ---- */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -400,7 +400,7 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
 <body>
 <div id="app">
 
-<div id="watermark">总制作 61Louisa（xm2805-lyc）｜特别鸣谢 xm2806-lym、xm2805-ysy、xm2807-lxc</div>
+<div id="watermark">总制作 61Louisa（xm2805-lyc）｜联合制作 xm2806-lym、xm2805-ysy、xm2807-lxc｜特别鸣谢 xm2802-wrj、xm2802-lyr</div>
 <button id="btn-about" onclick="showDisclaimer(true)">📜 声明 & 玩法</button>
 
 <!-- ===== 登录弹窗 ===== -->
@@ -572,6 +572,7 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
         <li><strong>未掌握</strong>：从未答对过的题目，以正常亮度显示</li>
         <li><strong>已掌握</strong>：曾经答错过但之后答对过的题目，以半透明显示</li>
       </ul>
+      <p><strong>🔁 单题重做</strong>：单击任意错题（未掌握或已掌握均可），直接进入该题的独立重做模式。重做时显示正确答案和知识点解析，累加总星数但<strong>不影响当前游戏等级</strong>。答完点击「返回错题本」回到面板。</p>
       <p>错题面板底部提供<strong>导出打印</strong>功能：</p>
       <ul>
         <li><strong>📝 导出有解析版</strong>：包含题目、选项、正确答案和知识点解析，适合打印后对照复习</li>
@@ -670,6 +671,54 @@ function updateStatsDisplay() {
 // --- 单题重做模式 ---
 var _retrySingleMode = false;
 var _retrySingleBackup = null;
+
+function restoreRetryBackup(b) {
+  document.getElementById('career-select').style.display = b.careerSelectDisplay || 'block';
+  document.getElementById('game-area').style.display = b.gameAreaDisplay || 'none';
+  document.getElementById('result-area').style.display = b.resultAreaDisplay || 'none';
+  document.getElementById('top-bar').style.display = b.topBarDisplay || '';
+  document.getElementById('subject-label').textContent = b.subjectLabel;
+  document.getElementById('btn-next').textContent = b.btnNextText;
+  document.getElementById('btn-next').disabled = b.btnNextDisabled;
+  document.getElementById('btn-next').style.display = b.btnNextDisplay || 'inline-block';
+  currentQ = b.currentQ;
+  answered = b.answered;
+  selected = b.selected.slice();
+
+  if (b.gameAreaDisplay !== 'none' && b.currentQ && !b.answered) {
+    // 回到未作答的答题界面：重新渲染以恢复按钮事件，同时保留选项顺序
+    var sceneText = b.currentQ._sceneContext || '';
+    var sceneHtml = sceneText ? '<div style="padding:12px 16px;margin-bottom:14px;background:linear-gradient(135deg,rgba(255,210,0,0.06),rgba(255,210,0,0.02));border-left:3px solid rgba(255,210,0,0.35);border-radius:0 10px 10px 0;font-size:0.88rem;color:#c8cfe0;line-height:1.85;text-shadow:0 1px 2px rgba(0,0,0,0.3);"><span style="color:#ffd200;font-weight:700;">▎</span> ' + sceneText + '</div>' : '';
+    var qTypeName = typeof getQType === 'function' ? getQType(b.currentQ) : '单选';
+    var displayText = b.currentQ.text;
+    if (qTypeName === '不定项' || qTypeName === '多选') {
+      displayText = displayText.replace(/【.*?】/, '【' + qTypeName + '】');
+    }
+    setQuestionText(sceneHtml + displayText);
+    document.getElementById('question-feedback').innerHTML = '';
+    if (b.currentQ.choices && b.currentQ.choices.length > 0) {
+      renderChoices(b.currentQ, true);
+      // 恢复已选中样式
+      var btns = document.querySelectorAll('#options-grid .choice-btn');
+      selected.forEach(function(idx) {
+        if (btns[idx]) {
+          btns[idx].style.background = 'rgba(255,210,0,0.18)';
+          btns[idx].style.borderColor = 'rgba(255,210,0,0.55)';
+          btns[idx].style.color = '#fff';
+          btns[idx].style.transform = 'translateX(4px)';
+        }
+      });
+      var correctCount = b.currentQ.choices.filter(function(c) { return c.correct; }).length;
+      if (typeof updateSubmitBtnText === 'function') updateSubmitBtnText(correctCount, qTypeName);
+    } else if (b.currentQ.answer || b.currentQ.answers) {
+      renderFill(b.currentQ);
+    } else {
+      document.getElementById('question-box').innerHTML = b.boxHTML;
+    }
+  } else {
+    document.getElementById('question-box').innerHTML = b.boxHTML;
+  }
+}
 
 // --- 称号系统（每300星解锁一个，不重复"明日基石"四字，三色渐变）---
 var TITLES = [
@@ -797,27 +846,40 @@ function renderWrongPanel() {
   document.getElementById('wrong-panel-inner').innerHTML = html;
 }
 function retrySingle(timestamp) {
+  closeRecordsWindow();
   var all = loadAllRecords();
   var record = null;
   for (var i = 0; i < all.length; i++) {
     if (all[i].timestamp === timestamp) { record = all[i]; break; }
   }
   if (!record) return;
-  // 备份当前视图
+  // 备份当前视图与游戏状态（从首页、结果页或答题中打开知识宝典时的状态）
+  var _cs = document.getElementById('career-select').style.display;
+  var _ga = document.getElementById('game-area').style.display;
+  var _ra = document.getElementById('result-area').style.display;
   _retrySingleBackup = {
-    careerSelectDisplay: document.getElementById('career-select').style.display
+    careerSelectDisplay: _cs,
+    gameAreaDisplay: _ga,
+    resultAreaDisplay: _ra,
+    topBarDisplay: document.getElementById('top-bar').style.display,
+    subjectLabel: document.getElementById('subject-label').textContent,
+    boxHTML: document.getElementById('question-box').innerHTML,
+    currentQ: currentQ,
+    answered: answered,
+    selected: selected.slice(),
+    btnNextText: document.getElementById('btn-next').textContent,
+    btnNextDisabled: document.getElementById('btn-next').disabled,
+    btnNextDisplay: document.getElementById('btn-next').style.display
   };
   // 备份并覆盖 onNextQuestion
   _origOnNextQuestion = typeof onNextQuestion === 'function' ? onNextQuestion : null;
   onNextQuestion = function() {
     _retrySingleMode = false;
-    onNextQuestion = _origOnNextQuestion || function(){};
-    document.getElementById('career-select').style.display = _retrySingleBackup.careerSelectDisplay || 'block';
-    document.getElementById('game-area').style.display = 'none';
-    document.getElementById('top-bar').style.display = '';
-    document.getElementById('btn-next').textContent = '下一题 ➤';
-    document.getElementById('btn-next').disabled = true;
-    _retrySingleBackup = null;
+    onNextQuestion = _origOnNextQuestion || _originalOnNextQuestion || function(){};
+    if (_retrySingleBackup) {
+      restoreRetryBackup(_retrySingleBackup);
+      _retrySingleBackup = null;
+    }
     renderWrongPanel();
   };
   _retrySingleMode = true;
@@ -1098,6 +1160,7 @@ function closeModalAndExit() {
   document.getElementById('result-area').style.display = 'none';
   document.getElementById('career-select').style.display = 'block';
   updateRecordDisplay();
+  renderWrongPanel();
 }
 function saveAndStay() {
   saveGame(false);
@@ -1154,24 +1217,26 @@ function showRecordsWindow() {
   var overlay = document.getElementById('records-overlay');
   if (overlay) { overlay.style.display = 'flex'; return; }
   var html = '<div id="records-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;background:rgba(0,0,0,0.88);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;overflow-y:auto;">';
-  html += '<div style="width:100%;max-width:600px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h2 style="color:#FFD700;font-size:18px;">📖 知识宝典 · 错题本</h2><button onclick="closeRecordsWindow()" style="font-size:18px;background:none;border:none;color:#fff;cursor:pointer;padding:4px 10px;">✕</button></div>';
-  var stats = getStats();
-  html += '<div style="width:100%;max-width:600px;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;color:#fff;font-size:13px;">';
-  html += '<span style="background:rgba(255,255,255,0.1);padding:6px 12px;border-radius:6px;">📝 共 ' + stats.total + ' 题</span>';
-  html += '<span style="background:rgba(46,204,113,0.2);padding:6px 12px;border-radius:6px;color:#2ecc71;">✅ ' + stats.correct + '</span>';
-  html += '<span style="background:rgba(241,196,15,0.2);padding:6px 12px;border-radius:6px;color:#f1c40f;">⚠ ' + stats.partial + '</span>';
-  html += '<span style="background:rgba(231,76,60,0.2);padding:6px 12px;border-radius:6px;color:#e74c3c;">❌ ' + stats.wrong + '</span>';
-  html += '<span style="background:rgba(255,215,0,0.2);padding:6px 12px;border-radius:6px;color:#FFD700;">⭐ ' + stats.totalPoints + '</span></div>';
-  html += '<div style="width:100%;max-width:600px;display:flex;gap:6px;margin-bottom:10px;">';
-  html += '<button onclick="filterRecords(\'all\')" id="filter-all" class="rf-btn" style="background:#3498db;">全部</button>';
-  html += '<button onclick="filterRecords(\'correct\')" id="filter-correct" class="rf-btn" style="background:#2ecc71;">正确</button>';
-  html += '<button onclick="filterRecords(\'wrong\')" id="filter-wrong" class="rf-btn" style="background:#e74c3c;">错误/部分</button>';
-  html += '<button onclick="clearRecords();closeRecordsWindow()" style="margin-left:auto;padding:5px 12px;font-size:12px;background:rgba(255,255,255,0.1);border:1px solid #555;border-radius:4px;color:#aaa;cursor:pointer;">清空</button></div>';
+  html += '<div style="width:100%;max-width:600px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h2 style="color:#FFD700;font-size:18px;">📖 知识宝典</h2><button onclick="closeRecordsWindow()" style="font-size:18px;background:none;border:none;color:#fff;cursor:pointer;padding:4px 10px;">✕</button></div>';
+  html += '<div style="width:100%;max-width:600px;"><button onclick="clearRecords();closeRecordsWindow()" style="margin-left:auto;padding:5px 12px;font-size:12px;background:rgba(255,255,255,0.1);border:1px solid #555;border-radius:4px;color:#aaa;cursor:pointer;display:block;">清空</button></div>';
   html += '<div id="records-list" style="width:100%;max-width:600px;"></div></div>';
   document.body.insertAdjacentHTML('beforeend', html);
-  filterRecords('wrong');
+  filterRecords('all');
 }
-function closeRecordsWindow() { var overlay = document.getElementById('records-overlay'); if (overlay) overlay.style.display = 'none'; }
+function closeRecordsWindow() {
+  var overlay = document.getElementById('records-overlay');
+  if (overlay) overlay.style.display = 'none';
+  // 关闭后刷新错题面板（记录可能有更新）
+  renderWrongPanel();
+  // 避免下层所有区域都隐藏导致黑屏
+  var cs = document.getElementById('career-select');
+  var ga = document.getElementById('game-area');
+  var ra = document.getElementById('result-area');
+  function isVisible(el) { return el && window.getComputedStyle(el).display !== 'none'; }
+  if (!isVisible(cs) && !isVisible(ga) && !isVisible(ra)) {
+    cs.style.display = 'block';
+  }
+}
 
 function showKnowledgeCard(record) {
   var existing = document.getElementById('knowledge-card-popup'); if (existing) existing.remove();
@@ -1240,6 +1305,7 @@ function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < al
      game-logic2.js
      ============================================================ -->
 <script src="game-logic2.js"></script>
+<script>var _originalOnNextQuestion = typeof onNextQuestion === 'function' ? onNextQuestion : null;</script>
 
 <!-- ============================================================
      整合层
@@ -1346,13 +1412,20 @@ function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < al
     });
   });
 
-  document.getElementById('btn-next').addEventListener('click', function() { if (typeof onNextQuestion === 'function') onNextQuestion(); });
+  document.getElementById('btn-next').addEventListener('click', function() {
+    // 未作答时弹出确认提示
+    if (!answered && currentQ && !_retrySingleMode) {
+      if (!confirm('⚠ 还未作答，是否跳过此题？确认后将无法返回。')) return;
+    }
+    if (typeof onNextQuestion === 'function') onNextQuestion();
+  });
   document.getElementById('btn-restart').addEventListener('click', function() {
     document.getElementById('result-area').style.display = 'none';
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('career-select').style.display = 'block';
     saveHighestOnly();
     updateRecordDisplay();
+    renderWrongPanel();
   });
 })();
 
@@ -1360,17 +1433,13 @@ function goBackToCareer() {
   var ga = document.getElementById('game-area');
   if (ga && ga.style.display !== 'none') {
     if (_retrySingleMode) {
-      // 单题重做模式：退出恢复
+      // 单题重做模式：退出，回到知识宝典来源页
       _retrySingleMode = false;
-      onNextQuestion = _origOnNextQuestion || function(){};
+      onNextQuestion = _origOnNextQuestion || _originalOnNextQuestion || function(){};
       if (_retrySingleBackup) {
-        document.getElementById('career-select').style.display = _retrySingleBackup.careerSelectDisplay || 'block';
-        document.getElementById('top-bar').style.display = '';
-        document.getElementById('btn-next').textContent = '下一题 ➤';
-        document.getElementById('btn-next').disabled = true;
+        restoreRetryBackup(_retrySingleBackup);
         _retrySingleBackup = null;
       }
-      document.getElementById('game-area').style.display = 'none';
       updateRecordDisplay();
       renderWrongPanel();
       return;
@@ -1382,6 +1451,7 @@ function goBackToCareer() {
   document.getElementById('result-area').style.display = 'none';
   document.getElementById('career-select').style.display = 'block';
   updateRecordDisplay();
+  renderWrongPanel();
 }
 
 // --- 免责声明 / 玩法弹窗 ---

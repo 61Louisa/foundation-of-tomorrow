@@ -18,7 +18,7 @@ QUESTIONS.farmer = {
   history: [
     // --- 已保留原有6题 ---
     { subject:'化学', text:'1950年《土地改革法》颁布，你分到几亩田。可庄稼叶片发黄、植株矮小，老农说缺肥。关于氮肥及其使用，下列说法正确的是？', choices:[{text:'尿素[CO(NH₂)₂]是常用氮肥，含氮量约46.7%',correct:true,knowledge:'化学·氮肥：尿素含氮量高达46.7%，在土壤中经脲酶作用水解为NH₄⁺被植物吸收。'},{text:'铵态氮肥可与草木灰混合施用以增强肥效',correct:false},{text:'取样加浓NaOH加热，用湿润红色石蕊试纸检验气体',correct:true,knowledge:'化学·离子检验：NH₄⁺+OH⁻→(加热)NH₃↑+H₂O，NH₃使红色石蕊试纸变蓝。'},{text:'氮肥施用越多越好，可大幅提高产量且无任何环境危害',correct:false}] },
-    { subject:'化学', text:'土改分田后，你发现自家田因长期渍水呈强酸性（pH≈4.5），村里用生石灰改良。关于土壤酸碱调节，以下说法正确的是？', choices:[{text:'CaO+H₂O=Ca(OH)₂，OH⁻中和土壤中H⁺使pH升高',correct:true,knowledge:'化学·酸碱中和：CaO+H₂O=Ca(OH)₂，Ca(OH)₂+2H⁺=Ca²⁺+2H₂O。'},{text:'该土壤约需CaO 420 kg',correct:true},{text:'NaOH碱性比Ca(OH)₂更强，改良酸性土壤效果更好且更经济实惠',correct:false},{text:'酸性土壤也可施用石膏来调节，其原理与生石灰相同',correct:false}] },
+    { subject:'化学', text:'土改分田后，你发现自家田因长期渍水呈强酸性（pH≈4.5），村里用生石灰改良。关于土壤酸碱调节，以下说法正确的是？', choices:[{text:'CaO+H₂O=Ca(OH)₂，OH⁻中和土壤中H⁺使pH升高',correct:true,knowledge:'化学·酸碱中和：CaO+H₂O=Ca(OH)₂，Ca(OH)₂+2H⁺=Ca²⁺+2H₂O。'},{text:'该土壤约需CaO 420 kg',correct:true,knowledge:'化学·酸碱计算：根据土壤pH和缓冲容量估算所需石灰量，体现化学定量思维。'},{text:'NaOH碱性比Ca(OH)₂更强，改良酸性土壤效果更好且更经济实惠',correct:false},{text:'酸性土壤也可施用石膏来调节，其原理与生石灰相同',correct:false}] },
     { subject:'政治', text:'1978年12月召开的党的（　），开启了改革开放和社会主义现代化建设新时期。', choices:[{text:'十一届三中全会',correct:true,knowledge:'政治·改革开放：十一届三中全会于1978年12月召开，确立了以经济建设为中心的基本路线。'},{text:'十二届三中全会',correct:false},{text:'十三届三中全会',correct:false},{text:'十四届三中全会',correct:false}] },
     { subject:'政治', text:'党的十一届三中全会后，（　）得以推行，乡镇企业迅速发展。', choices:[{text:'人民公社制度',correct:false},{text:'家庭联产承包责任制',correct:true,knowledge:'政治·农村改革：家庭联产承包责任制解放了农村生产力，是改革开放的重要突破口。'},{text:'农业合作化运动',correct:false},{text:'土地私有化改革',correct:false}] },
     { subject:'化学', type:'fill', text:'土壤改良中常用生石灰，生石灰的化学式是______。', answer:'CaO', answers:['CaO','氧化钙'], knowledge:'化学·中和反应：CaO+H₂O=Ca(OH)₂，Ca(OH)₂中和土壤酸性。' },
@@ -36,10 +36,10 @@ QUESTIONS.farmer = {
   ],
   modern: [
     // --- 已保留原有6题 ---
-    { subject:'化学', text:'改革开放后家庭联产承包，你自主决定用肥。关于复合肥料及其配比，以下哪个说法正确？', choices:[{text:'复合肥料是指同时含有N、P、K三种营养元素中两种或以上的化学肥料，如磷酸二氢铵(NH₄H₂PO₄)',correct:true,knowledge:'化学·复合肥：复合肥料含两种或以上营养元素，标注N-P₂O₅-K₂O的百分含量。'},{text:'某种复合肥标注15-15-15，表示N:P₂O₅:K₂O质量分数各15%',correct:true},{text:'KNO₃同时含K和N两种营养元素，是一种复合肥料',correct:true},{text:'磷酸钙[Ca₃(PO₄)₂]含P和Ca，也属于复合肥料',correct:false}] },
-    { subject:'化学', text:'你买了NH₄HCO₃（碳铵）做追肥，也想撒些草木灰（K₂CO₃）补钾。农技员提醒不能混用。下列说法正确的是？', choices:[{text:'反应本质是NH₄⁺与草木灰水解产生的OH⁻反应放出NH₃，导致氮肥失效',correct:true,knowledge:'化学·铵盐性质：NH₄⁺+OH⁻=NH₃↑+H₂O，铵态氮肥不能与碱性物质混用。'},{text:'除K₂CO₃外，Ca(OH)₂、CaO等碱性物质同样不能与铵态氮肥混用，原理相同',correct:true},{text:'NH₄HCO₃与K₂CO₃混合时发生反应：2NH₄HCO₃+K₂CO₃→2NH₃↑+2CO₂↑+2H₂O+K₂CO₃',correct:false},{text:'若将100g NH₄HCO₃与足量K₂CO₃混合加热，标准状况下最多损失约28.4L NH₃',correct:true}] },
+    { subject:'化学', text:'改革开放后家庭联产承包，你自主决定用肥。关于复合肥料及其配比，以下哪个说法正确？', choices:[{text:'复合肥料是指同时含有N、P、K三种营养元素中两种或以上的化学肥料，如磷酸二氢铵(NH₄H₂PO₄)',correct:true,knowledge:'化学·复合肥：复合肥料含两种或以上营养元素，标注N-P₂O₅-K₂O的百分含量。'},{text:'某种复合肥标注15-15-15，表示N:P₂O₅:K₂O质量分数各15%',correct:true,knowledge:'化学·复合肥标识：15-15-15表示N、P₂O₅、K₂O含量各15%，总养分45%。'},{text:'KNO₃同时含K和N两种营养元素，是一种复合肥料',correct:true,knowledge:'化学·复合肥：硝酸钾KNO₃含氮13.8%、氧化钾46.6%，属于二元复合肥。'},{text:'磷酸钙[Ca₃(PO₄)₂]含P和Ca，也属于复合肥料',correct:false}] },
+    { subject:'化学', text:'你买了NH₄HCO₃（碳铵）做追肥，也想撒些草木灰（K₂CO₃）补钾。农技员提醒不能混用。下列说法正确的是？', choices:[{text:'反应本质是NH₄⁺与草木灰水解产生的OH⁻反应放出NH₃，导致氮肥失效',correct:true,knowledge:'化学·铵盐性质：NH₄⁺+OH⁻=NH₃↑+H₂O，铵态氮肥不能与碱性物质混用。'},{text:'除K₂CO₃外，Ca(OH)₂、CaO等碱性物质同样不能与铵态氮肥混用，原理相同',correct:true,knowledge:'化学·铵盐性质：所有碱性物质都会与铵盐反应释放氨气，导致氮元素流失。'},{text:'NH₄HCO₃与K₂CO₃混合时发生反应：2NH₄HCO₃+K₂CO₃→2NH₃↑+2CO₂↑+2H₂O+K₂CO₃',correct:false},{text:'若将100g NH₄HCO₃与足量K₂CO₃混合加热，标准状况下最多损失约28.4L NH₃',correct:true,knowledge:'化学·计算：100g NH₄HCO₃物质的量约1.265mol，完全反应生成1.265mol NH₃，标况下体积约28.4L。'}] },
     { subject:'政治', text:'1992年邓小平南方谈话和党的十四大明确，我国经济体制改革的目标是建立（　）。', choices:[{text:'计划经济体制',correct:false},{text:'有计划的商品经济体制',correct:false},{text:'社会主义市场经济体制',correct:true,knowledge:'政治·经济体制：十四大确立了社会主义市场经济体制的改革目标，是改革开放的重大突破。'},{text:'自由市场经济体制',correct:false}] },
-    { subject:'政治', text:'《春天的故事》唱道："一九九二年，又是一个春天，有一位老人在中国的南海边写下诗篇。"这里的"诗篇"指的就是（　）。', choices:[{text:'设立经济特区',correct:false},{text:'提出"一国两制"方针',correct:false},{text:'南方谈话和党的十四大明确建立社会主义市场经济体制',correct:true},{text:'提出科学发展观',correct:false}] },
+    { subject:'政治', text:'《春天的故事》唱道："一九九二年，又是一个春天，有一位老人在中国的南海边写下诗篇。"这里的"诗篇"指的就是（　）。', choices:[{text:'设立经济特区',correct:false},{text:'提出"一国两制"方针',correct:false},{text:'南方谈话和党的十四大明确建立社会主义市场经济体制',correct:true,knowledge:'政治·改革开放（沪教版）：1992年春邓小平南方谈话解决了"姓社姓资"的争论，同年十四大确立社会主义市场经济体制目标。'},{text:'提出科学发展观',correct:false}] },
     { subject:'化学', type:'fill', text:'大棚增施CO₂气肥时，NH₄HCO₃与稀H₂SO₄反应，化学方程式为______。', answer:'2NH₄HCO₃+H₂SO₄=(NH₄)₂SO₄+2CO₂↑+2H₂O', answers:['2NH₄HCO₃+H₂SO₄=(NH₄)₂SO₄+2CO₂+2H₂O','2NH4HCO3+H2SO4=(NH4)2SO4+2CO2+2H2O'], knowledge:'化学·气肥制备：NH₄HCO₃与H₂SO₄反应生成CO₂提高光合作用效率，副产物(NH₄)₂SO₄为优质氮肥。' },
     { subject:'政治', type:'fill', text:'我国社会主要矛盾已经转化为人民日益增长的美好生活需要和______的发展之间的矛盾。', answer:'不平衡不充分', answers:['不平衡不充分','不平衡'], knowledge:'政治·新时代：党的十九大报告提出社会主要矛盾的转化。' },
     // --- 新增化学题 ---
@@ -56,9 +56,9 @@ QUESTIONS.farmer = {
   ],
   cyberpunk: [
     // --- 已保留原有6题 ---
-    { subject:'化学', text:'1990年代科技兴农，村里建了蔬菜大棚。为增产需增施CO₂气肥，用稀H₂SO₄与NH₄HCO₃反应制备。下列说法正确的是？', choices:[{text:'2NH₄HCO₃+H₂SO₄→(NH₄)₂SO₄+2CO₂↑+2H₂O',correct:true,knowledge:'化学·气肥：一举两得——既产生CO₂促进光合作用，又得到硫酸铵作氮肥。'},{text:'用500g NH₄HCO₃与足量稀硫酸反应，标况下可产生约142L CO₂气体',correct:true},{text:'CaCO₃+2HCl=CaCl₂+CO₂↑+H₂O',correct:true},{text:'CO₂浓度越高光合作用越强，因此大棚CO₂气肥浓度越高越好，无需控制',correct:false}] },
-    { subject:'化学', text:'在不同年代，你始终面临施肥问题。关于作物缺素症状与对应肥料，下列匹配和分析正确的是？', choices:[{text:'叶片发黄、老叶先黄、植株矮小→缺氮，应追施尿素或碳铵',correct:true,knowledge:'化学·植物营养：N促叶片生长，是叶绿素和蛋白质的组成元素。缺氮时老叶先黄是因为氮可从老叶转运到新叶。'},{text:'茎秆细弱易倒伏、老叶边缘焦枯→缺钾，应追施KCl或K₂SO₄',correct:true},{text:'果实小而少、成熟延迟、叶片暗绿带紫红色→缺磷，应追施过磷酸钙',correct:true},{text:'叶片出现褐色斑点、植株顶端枯死→应追施Ca(OH)₂补充钙元素',correct:false}] },
-    { subject:'政治', text:'【多选】在当代中国，坚持和发展习近平新时代中国特色社会主义思想，就是真正坚持和发展马克思主义。这是因为（　）', multi:true, choices:[{text:'是当代中国马克思主义、二十一世纪马克思主义',correct:true},{text:'是中华文化和中国精神的时代精华',correct:true},{text:'是中国特色社会主义理论体系的重要组成部分',correct:true},{text:'是全党全国人民为实现中华民族伟大复兴而奋斗的物质保障',correct:false}] },
+    { subject:'化学', text:'1990年代科技兴农，村里建了蔬菜大棚。为增产需增施CO₂气肥，用稀H₂SO₄与NH₄HCO₃反应制备。下列说法正确的是？', choices:[{text:'2NH₄HCO₃+H₂SO₄→(NH₄)₂SO₄+2CO₂↑+2H₂O',correct:true,knowledge:'化学·气肥：一举两得——既产生CO₂促进光合作用，又得到硫酸铵作氮肥。'},{text:'用500g NH₄HCO₃与足量稀硫酸反应，标况下可产生约142L CO₂气体',correct:true,knowledge:'化学·计算：500g NH₄HCO₃约6.33mol，生成6.33mol CO₂，标况下体积约142L。'},{text:'CaCO₃+2HCl=CaCl₂+CO₂↑+H₂O',correct:true,knowledge:'化学·气肥制备：碳酸钙与盐酸反应也可生成CO₂，但成本较高，不适合大规模农业生产。'},{text:'CO₂浓度越高光合作用越强，因此大棚CO₂气肥浓度越高越好，无需控制',correct:false}] },
+    { subject:'化学', text:'在不同年代，你始终面临施肥问题。关于作物缺素症状与对应肥料，下列匹配和分析正确的是？', choices:[{text:'叶片发黄、老叶先黄、植株矮小→缺氮，应追施尿素或碳铵',correct:true,knowledge:'化学·植物营养：N促叶片生长，是叶绿素和蛋白质的组成元素。缺氮时老叶先黄是因为氮可从老叶转运到新叶。'},{text:'茎秆细弱易倒伏、老叶边缘焦枯→缺钾，应追施KCl或K₂SO₄',correct:true,knowledge:'化学·植物营养：钾能促进茎秆健壮和光合产物运输，缺钾时老叶边缘焦枯是典型症状。'},{text:'果实小而少、成熟延迟、叶片暗绿带紫红色→缺磷，应追施过磷酸钙',correct:true,knowledge:'化学·植物营养：磷促进花芽分化和果实发育，缺磷时糖类积累形成花青素使叶片呈紫红色。'},{text:'叶片出现褐色斑点、植株顶端枯死→应追施Ca(OH)₂补充钙元素',correct:false}] },
+    { subject:'政治', text:'【多选】在当代中国，坚持和发展习近平新时代中国特色社会主义思想，就是真正坚持和发展马克思主义。这是因为（　）', multi:true, choices:[{text:'是当代中国马克思主义、二十一世纪马克思主义',correct:true,knowledge:'政治·习近平新时代中国特色社会主义思想（沪教版）：习近平新时代中国特色社会主义思想是马克思主义中国化的最新成果，是21世纪马克思主义。'},{text:'是中华文化和中国精神的时代精华',correct:true,knowledge:'政治·文化（沪教版）：习近平新时代中国特色社会主义思想植根于中华优秀传统文化，凝聚了时代精神。'},{text:'是中国特色社会主义理论体系的重要组成部分',correct:true,knowledge:'政治·理论体系（沪教版）：习近平新时代中国特色社会主义思想是中国特色社会主义理论体系的最新组成部分，与邓三科一脉相承又与时俱进。'},{text:'是全党全国人民为实现中华民族伟大复兴而奋斗的物质保障',correct:false}] },
     { subject:'政治', text:'实现中国梦必须走中国道路、弘扬中国精神、凝聚中国（　）。', choices:[{text:'力量',correct:true,knowledge:'政治·中国梦：实现中华民族伟大复兴，必须走中国特色社会主义道路，弘扬以爱国主义为核心的民族精神，凝聚全国各族人民大团结的力量。'},{text:'智慧',correct:false},{text:'共识',correct:false},{text:'人心',correct:false}] },
     { subject:'化学', type:'fill', text:'赛博朋克时代，垂直农场的营养液中需添加三种大量元素，它们是N、P、______。', answer:'K', answers:['K','钾','钾肥'], knowledge:'化学·植物营养：植物需要大量元素N（氮）、P（磷）、K（钾），N促叶、P促果、K促根。' },
     { subject:'政治', type:'fill', text:'实现中国梦必须走中国道路、弘扬中国精神、凝聚中国______。', answer:'力量', answers:['力量','人民力量','群众力量'], knowledge:'政治·中国梦：实现中华民族伟大复兴的中国梦，必须凝聚全国各族人民大团结的力量。' },
@@ -84,7 +84,7 @@ QUESTIONS.journalist = {
     { subject:'英语', text:'改革开放初期，你作为一名记者被派往国外采访。对方说"This is a long shot." 这句话最可能的意思是？', choices:[{text:'这是一次成功可能性不大的尝试',correct:true,knowledge:'英语·习惯用语："a long shot"源自射击术语，指打中远距离目标的可能性很小。'},{text:'这是一次长途旅行',correct:false},{text:'这是一次长时间的拍摄',correct:false},{text:'这是一次漫长的射击',correct:false}] },
     { subject:'英语', text:'你在一篇关于中国经济发展的英文报道中写道："The reform and opening-up policy ________ tremendous changes to China." 最合适的动词是？', choices:[{text:'brought about',correct:true,knowledge:'英语·动词搭配："bring about"意为"带来、引起（变化）"，是正式新闻报道中常用的短语动词。'},{text:'brought up',correct:false},{text:'brought in',correct:false},{text:'brought out',correct:false}] },
     { subject:'语文', type:'fill', text:'1950年代新闻报道中常用"雄赳赳，气昂昂，跨过______"来形容志愿军出征。', answer:'鸭绿江', answers:['鸭绿江'], knowledge:'语文·名句填空：出自《中国人民志愿军战歌》。' },
-    { subject:'英语', type:'fill', text:'The reform and opening-up policy has brought great ______ (变化) to China.', answer:'changes', answers:['changes','change'], knowledge:'英语·词汇："change"可数时表示"具体的变化"。' },
+    { subject:'英语', type:'fill', text:'The reform and opening-up policy has brought great ______ (change).', answer:'changes', answers:['changes','change'], knowledge:'英语·词汇辨析（上海高考）：change作可数名词表示"具体变化"（如changes in policy），作不可数名词表示"变化"这一抽象概念。此处great修饰可数名词复数，表示"巨大的变化（多个方面）"，故用changes。' },
     // --- 新增语文题 ---
     { subject:'语文', text:'你采访了一位经历过长征的老红军，需要在报道中引用毛泽东《七律·长征》的名句。以下哪句出自该诗？', choices:[{text:'"红军不怕远征难，万水千山只等闲"',correct:true,knowledge:'语文·诗歌鉴赏（沪教版·必修）：毛泽东《七律·长征》是高一必修篇目，颔联"五岭逶迤腾细浪，乌蒙磅礴走泥丸"运用夸张和比喻。'},{text:'"钟山风雨起苍黄，百万雄师过大江"',correct:false},{text:'"雄关漫道真如铁，而今迈步从头越"',correct:false},{text:'"天若有情天亦老，人间正道是沧桑"',correct:false}] },
     { subject:'语文', text:'你在整理一份老报纸，发现一篇社论中用了成语"差强人意"。这个成语的意思是？', choices:[{text:'大体上还能使人满意',correct:true,knowledge:'语文·成语（沪教版·语言运用）：差强人意出自《后汉书》，"差"意为"稍微、大致"，常被误解为"令人不满意"。'},{text:'完全不能令人满意',correct:false},{text:'比别人差很多',correct:false},{text:'强迫别人接受',correct:false}] },
@@ -100,19 +100,19 @@ QUESTIONS.journalist = {
     { subject:'语文', text:'你运营一个新闻公众号，需要写一篇吸引眼球的标题。以下哪个标题最符合新闻标题的原则？', choices:[{text:'标题准确概括核心事实，同时有一定吸引力',correct:true,knowledge:'语文·新闻标题：好标题要"准确、鲜明、简洁、生动"，不能违背真实性原则做"标题党"。'},{text:'标题越长越好，包含所有细节',correct:false},{text:'标题越夸张越好，只要吸引点击就行',correct:false},{text:'标题全部使用网络热词和表情符号',correct:false}] },
     { subject:'语文', text:'你在撰写深度报道时引用了某专家的原话。以下哪种引用方式最符合新闻规范？', choices:[{text:'直接引语使用引号，准确记录原话，注明专家姓名和职务',correct:true,knowledge:'语文·新闻引用：直接引语必须用引号标注，一字不差；间接引语要忠实原意。'},{text:'将专家的话改为自己的语言，不加引号显得更流畅',correct:false},{text:'只写"专家表示"，不署名保护隐私',correct:false},{text:'根据需要修改专家原话，使其更有冲击力',correct:false}] },
     { subject:'英语', text:'你采访一位外国CEO，他说："We need to think outside the box." 这句话的意思是？', choices:[{text:'需要跳出常规思维，创新思考',correct:true,knowledge:'英语·习语："think outside the box"源于九点谜题，引申为打破常规、创新思维。'},{text:'需要到办公室外面去思考',correct:false},{text:'需要检查箱子外面的物品',correct:false},{text:'需要重新整理办公空间',correct:false}] },
-    { subject:'英语', text:'你的英文报道中有一句："The pandemic has ________ the way we work." 表示"深刻改变了"使用哪个词最恰当？', choices:[{text:'transformed',correct:true,knowledge:'英语·近义词辨析："transform"强调本质上的彻底改变。'},{text:'changed',correct:false},{text:'altered',correct:false},{text:'varied',correct:false}] },
+    { subject:'英语', text:'你的英文报道中有一句："The pandemic has ________ the way we work." 表示"深刻改变了"使用哪个词最恰当？', choices:[{text:'transformed',correct:true,knowledge:'英语·近义词辨析（上海高考核心词汇）：transform强调"本质、形态上的彻底改变"（trans=转变，form=形态），语气最强；change为一般用词"改变"；alter侧重"局部修改"；vary指"变化、多样化"。此处强调疫情深刻且根本地改变了工作方式，transform最贴切。'},{text:'changed',correct:false},{text:'altered',correct:false},{text:'varied',correct:false}] },
     { subject:'语文', type:'fill', text:'新媒体环境中，一种以"短小精悍、信息密集、快速传播"为特征的文体被称为"______体"。', answer:'微', answers:['微','短'], knowledge:'语文·新媒体：微博、微信等平台的流行催生了"微文体"。' },
-    { subject:'英语', type:'fill', text:'With the rise of social media, the way we ______ (消费) news has changed dramatically.', answer:'consume', knowledge:'英语·词汇：consume news 是"消费/获取新闻"的地道搭配。' },
+    { subject:'英语', type:'fill', text:'With the rise of social media, the way we ______ (consume) news has changed dramatically.', answer:'consume', answers:['consume'], knowledge:'英语·词汇搭配（上海高考核心词汇）：consume news 是地道搭配，意为"消费/获取新闻资讯"。consume本义为"消费、消耗"，引申为"阅读/观看（内容）"，常与news/media/content等搭配使用。' },
     // --- 新增语文题 ---
     { subject:'语文', text:'你的深度报道需要引用《论语》名句增强说服力。以下关于《论语》和孔子的说法正确的是？', choices:[{text:'《论语》是记录孔子及其弟子言行的语录体散文集',correct:true,knowledge:'语文·文学常识（沪教版·必修）：《论语》是儒家经典，共20篇。孔子名丘字仲尼，春秋末期鲁国人，儒家学派创始人。'},{text:'《论语》全部由孔子本人亲笔撰写',correct:false},{text:'《论语》属于编年体史书',correct:false},{text:'《论语》共50篇',correct:false}] },
     { subject:'语文', text:'编辑发现一段文字有语病："通过这次采访活动，使我对基层工作有了更深的了解。"以下修改正确的是？', choices:[{text:'删除"通过"或"使"',correct:true,knowledge:'语文·病句修改（沪教版·语言运用）：滥用介词（通过/随着/由于..."使..."）是高考常见病句类型，导致主语残缺。'},{text:'把"了解"改为"理解"',correct:false},{text:'在句首加"我"',correct:false},{text:'删除"更深的"',correct:false}] },
-    { subject:'语文', text:'你报道传统文化传承，引用了古诗词。以下哪句诗的作者与朝代匹配正确？', choices:[{text:'"人生自古谁无死，留取丹心照汗青"',correct:true,knowledge:'语文·古诗文（沪教版）：文天祥《过零丁洋》，南宋末年民族英雄，兵败被俘后英勇就义。'},{text:'"长风破浪会有时，直挂云帆济沧海"',correct:false},{text:'"落霞与孤鹜齐飞，秋水共长天一色"',correct:false},{text:'"但愿人长久，千里共婵娟"',correct:false}] },
+    { subject:'语文', text:'你报道传统文化传承，引用了古诗词。以下哪句诗的作者与朝代匹配正确？', choices:[{text:'文天祥（南宋）——"人生自古谁无死，留取丹心照汗青"',correct:true,knowledge:'语文·古诗文（沪教版）：文天祥《过零丁洋》，南宋末年民族英雄，兵败被俘后英勇就义。"丹心照汗青"意为忠心永垂史册。'},{text:'李白（唐）——"长风破浪会有时，直挂云帆济沧海"',correct:false,knowledge:'此句出自李白《行路难》，但题目要求匹配正确的只有A项。'},{text:'王勃（唐）——"落霞与孤鹜齐飞，秋水共长天一色"',correct:false},{text:'苏轼（北宋）——"但愿人长久，千里共婵娟"',correct:false}] },
     { subject:'语文', type:'fill', text:'议论文写作中，论证方法包括举例论证、道理论证、______论证和比喻论证。', answer:'对比', answers:['对比','正反对比'], knowledge:'语文·写作（沪教版）：上海高考作文评分标准：审题立意25%、内容结构25%、语言表达25%、书写卷面25%。论证方法包括举例、道理、对比、比喻。' },
     // --- 新增英语题 ---
     { subject:'英语', text:'英文报道中的一句话："Had it not been for the timely intervention, the situation ________ much worse." 此处应填什么？', choices:[{text:'would have been',correct:true,knowledge:'英语·虚拟语气（上海高考·重点语法）：Had it not been for... = If it had not been for...（省略if的倒装虚拟条件句）。'},{text:'will be',correct:false},{text:'had been',correct:false},{text:'is',correct:false}] },
-    { subject:'英语', text:'一篇经济报道标题："China\'s GDP ________ by 6.5% in the first quarter." 最合适的动词是？', choices:[{text:'grew',correct:true,knowledge:'英语·词汇辨析（上海高考）：grow为不及物动词，increase可作及物/不及物。by+百分比表示变化幅度。'},{text:'increased by 6.5% was',correct:false},{text:'was growing in',correct:false},{text:'had been increased for',correct:false}] },
+    { subject:'英语', text:'一篇经济报道标题："China\'s GDP ________ by 6.5% in the first quarter." 最合适的动词是？', choices:[{text:'grew',correct:true,knowledge:'英语·词汇辨析（上海高考·经济报道常用语）：grow为不及物动词，表示"增长"；increase可及物/不及物，但grow在描述经济数据时更简洁地道。by+百分比表示"幅度为…"。其他选项：increased...was搭配混乱，was growing进行时不恰当，had been increased语态错误。'},{text:'increased by 6.5% was',correct:false},{text:'was growing in',correct:false},{text:'had been increased for',correct:false}] },
     // --- 新增多选 ---
-    { subject:'英语', multi:true, text:'【多选】你在撰写英文深度报道时，需要准确使用各种时态。以下关于英语时态用法的描述正确的有？', choices:[{text:'现在完成时(have/has done)强调过去动作对现在的影响',correct:true,knowledge:'英语·时态（上海高考）：现在完成时表示过去发生的动作对现在仍有影响或结果。'},{text:'过去进行时(was/were doing)表示过去某个时间点正在发生的动作',correct:true,knowledge:'英语·时态（上海高考）：过去进行时为背景事件提供时间框架，常与一般过去时搭配使用。'},{text:'将来完成时(will have done)表示到将来某时已经完成的动作',correct:false},{text:'过去完成时(had done)只能用于"过去的过去"，不能独立使用',correct:false}] }
+    { subject:'英语', multi:true, text:'【多选】你在撰写英文深度报道时，需要准确使用各种时态。以下关于英语时态用法的描述正确的有？', choices:[{text:'现在完成时(have/has done)强调过去动作对现在的影响',correct:true,knowledge:'英语·时态（上海高考·语法重点）：现在完成时的核心用法——①已完成（结果影响现在）②未完成（持续到现在）③经历（曾经做过）。常与already/yet/ever/never等副词连用。'},{text:'过去进行时(was/were doing)表示过去某个时间点正在发生的动作',correct:true,knowledge:'英语·时态（上海高考·语法填空）：过去进行时为背景事件提供时间框架，常与一般过去时搭配（如I was reading when he came in）。强调动作的"持续性"和"背景性"。'},{text:'将来完成时(will have done)表示到将来某时已经完成的动作',correct:false},{text:'过去完成时(had done)只能用于"过去的过去"，不能独立使用',correct:false}] }
   ],
   cyberpunk: [
     { subject:'语文', text:'在脑机接口普及的时代，新闻可以直接通过神经信号传递。此时"新闻写作"最可能变成什么形式？', choices:[{text:'记者仍需要文字素养',correct:true,knowledge:'语文·未来写作：逻辑思维、语言组织、事实核查等核心写作素养在技术变革中仍然不可替代。'},{text:'不再需要文字，人类已经不需要语言交流了',correct:false},{text:'AI完全代替记者',correct:false},{text:'所有人都能直接读取他人思想',correct:false}] },
@@ -177,7 +177,7 @@ QUESTIONS.doctor = {
     { subject:'地理', text:'火星殖民地的医生需要应对火星环境对人类健康的影响。火星重力约为地球1/3，长期生活在低重力环境会导致？', choices:[{text:'骨密度下降和肌肉萎缩',correct:true,knowledge:'地理·太空医学：国际空间站研究表明，宇航员每月骨密度下降1-2%，重力是骨骼和肌肉保持功能的关键刺激。'},{text:'身高变矮',correct:false},{text:'免疫力增强',correct:false},{text:'视力变好',correct:false}] },
     // --- 新增生物题 ---
     { subject:'生物', text:'基因治疗中，如何将正常的CFTR基因导入囊性纤维化患者的肺上皮细胞？最常用的载体是？', choices:[{text:'腺相关病毒载体',correct:true,knowledge:'生物·基因治疗（沪教版·基因工程应用）：载体选择原则——安全性（低免疫原性）、高效转导、靶向性。AAV和慢病毒是最常用的病毒载体。'},{text:'质粒直接注射',correct:false},{text:'脂质体包裹后口服',correct:false},{text:'直接用显微注射针打入每个细胞',correct:false}] },
-    { subject:'生物', text:'【多选】人工合成基因线路（Synthetic gene circuits）可用于设计"智能细胞"实现精准药物释放。以下哪些是合成生物学的基本元件？', multi:true, choices:[{text:'启动子',correct:true,knowledge:'生物·合成生物学（沪教版拓展）：合成生物学将工程学原理应用于生物学，用标准化元件（启动子、RBS、CDS、终止子等）构建基因线路。'},{text:'核糖体结合位点',correct:true},{text:'终止子',correct:true},{text:'细胞膜',correct:false}] },
+    { subject:'生物', text:'【多选】人工合成基因线路（Synthetic gene circuits）可用于设计"智能细胞"实现精准药物释放。以下哪些是合成生物学的基本元件？', multi:true, choices:[{text:'启动子',correct:true,knowledge:'生物·合成生物学（沪教版拓展）：合成生物学将工程学原理应用于生物学，用标准化元件（启动子、RBS、CDS、终止子等）构建基因线路。'},{text:'核糖体结合位点',correct:true,knowledge:'生物·合成生物学（沪教版拓展）：RBS(核糖体结合位点)是mRNA上启动翻译的关键序列元件。'},{text:'终止子',correct:true,knowledge:'生物·合成生物学（沪教版拓展）：终止子是转录终止的信号序列，标记基因线路的结束。'},{text:'细胞膜',correct:false}] },
     { subject:'生物', text:'火星基地使用藻类生物反应器产生O₂并回收CO₂。在微观层面，这一过程依赖于什么细胞器？', choices:[{text:'叶绿体',correct:true,knowledge:'生物·光合作用（沪教版·等级考）：光反应：H₂O光解→O₂+[H]+ATP；暗反应（卡尔文循环）：CO₂+C₅→2C₃→C₆H₁₂O₆+C₅。'},{text:'线粒体',correct:false},{text:'核糖体',correct:false},{text:'内质网',correct:false}] },
     { subject:'生物', type:'fill', text:'人类基因组的编码区仅占约1.5%，其余98.5%曾被称为"______DNA"，但现在已知其具有重要的调控功能。', answer:'垃圾', answers:['垃圾','非编码','junk'], knowledge:'生物·基因组（沪教版）：非编码DNA包含启动子、增强子、转座子等，在基因表达调控中起关键作用。' },
     // --- 新增地理题 ---
@@ -233,7 +233,7 @@ QUESTIONS.programmer = {
     // --- 新增信息科技题 ---
     { subject:'信息科技', text:'量子计算机利用量子叠加态（0和1可以同时存在）实现并行计算。n个量子比特可以同时表示多少种状态？', choices:[{text:'2^n种',correct:true,knowledge:'信息科技·量子计算原理：经典比特只能是0或1。量子比特(qubit)可以处于|0⟩、|1⟩或两者的叠加态α|0⟩+β|1⟩。n个qubit→2^n维Hilbert空间。'},{text:'2n种',correct:false},{text:'n²种',correct:false},{text:'n!种',correct:false}] },
     { subject:'信息科技', text:'为防止量子计算机破解RSA加密，你在设计后量子密码（PQC）系统。相比RSA，以下哪种数学问题是量子计算机也难以高效解决的？', choices:[{text:'格上的最短向量问题',correct:true,knowledge:'信息科技·密码学：NIST已标准化基于格的密码方案（CRYSTALS-Kyber等）作为后量子密码标准。格的困难性问题目前同时抵抗经典和量子攻击。'},{text:'大整数因式分解',correct:false},{text:'离散对数问题',correct:false},{text:'椭圆曲线离散对数问题',correct:false}] },
-    { subject:'信息科技', text:'【多选】AI伦理中的"可解释性"（Explainability）问题是指？', multi:true, choices:[{text:'深度学习模型决策过程类似"黑箱"，难以解释',correct:true,knowledge:'信息科技·AI伦理：可解释AI（XAI）是当前AI研究的核心挑战之一。黑箱问题导致无法审计AI决策的公平性。'},{text:'金融风控AI拒绝贷款申请时必须能给出明确理由',correct:true},{text:'医疗AI诊断结果需要能够追溯推理依据',correct:true},{text:'AI程序必须在运行时输出所有内部变量',correct:false}] },
+    { subject:'信息科技', text:'【多选】AI伦理中的"可解释性"（Explainability）问题是指？', multi:true, choices:[{text:'深度学习模型决策过程类似"黑箱"，难以解释',correct:true,knowledge:'信息科技·AI伦理：可解释AI（XAI）是当前AI研究的核心挑战之一。黑箱问题导致无法审计AI决策的公平性。'},{text:'金融风控AI拒绝贷款申请时必须能给出明确理由',correct:true,knowledge:'信息科技·AI伦理：金融领域对AI决策的可解释性提出刚性要求，涉及贷款、保险等场景需提供拒绝理由。'},{text:'医疗AI诊断结果需要能够追溯推理依据',correct:true,knowledge:'信息科技·AI伦理：医疗AI的诊断推理必须可追溯，医生和患者有权知晓AI给出诊疗建议的依据。'},{text:'AI程序必须在运行时输出所有内部变量',correct:false}] },
     { subject:'信息科技', type:'fill', text:'在计算机科学中，用O(n²)、O(log n)等表示算法的时间______。', answer:'复杂度', answers:['复杂度','时间复杂度'], knowledge:'信息科技·算法分析（上海教材）：大O表示法描述算法执行时间/空间随输入规模增长的趋势。O(1)<O(log n)<O(n)<O(n log n)<O(n²)<O(2^n)。' },
     // --- 新增历史题 ---
     { subject:'历史', text:'人类社会经历了"采集狩猎→农业→工业→信息"四次重大转型。从历史唯物主义的角度，驱动这些转型的根本动力是什么？', choices:[{text:'生产力的发展',correct:true,knowledge:'历史·唯物史观（沪教版）：生产力决定生产关系，经济基础决定上层建筑。每一次社会大转型背后都是能源、工具、组织方式的革命性变革。'},{text:'天才人物的偶然出现',correct:false},{text:'外来文明的侵入和征服',correct:false},{text:'人口的机械增长',correct:false}] },
@@ -285,7 +285,7 @@ QUESTIONS.engineer = {
     // --- 新增数学题 ---
     { subject:'数学', text:'在设计空间电梯（太空电梯）时，缆绳需要从地球同步轨道（约36000km高处）延伸到地面。缆绳张力T(x)随高度x的变化满足微分方程dT/dx=-ρ(x)g(x)，其中ρ(x)是密度函数、g(x)是重力加速度。若假设g=常数，ρ=常数，T(h)=0（顶端自由），则地面处张力T(0)=？', choices:[{text:'T(0)=ρgh',correct:true,knowledge:'数学·微分方程（上海高考·定积分应用）：T(h)-T(0)=∫₀ʰ(-ρg)dx=-ρgh，所以T(0)=ρgh。等于是缆绳的总重量。'},{text:'T(0)=ρgh/2',correct:false},{text:'T(0)=0',correct:false},{text:'T(0)=ρgh²',correct:false}] },
     { subject:'数学', text:'火星城市建设中需要对资源进行优化分配。你有a元预算，用于建造水循环系统（单位成本m元，效益函数U=n₁ln(w)）和氧气生产系统（单位成本n元，效益函数V=n₂ln(q)）。在预算约束下最大化总效益，这种问题属于？', choices:[{text:'条件极值问题',correct:true,knowledge:'数学·最优化（上海高考·导数应用）：带约束的最优化→构造拉格朗日函数L=U(m)+V(n)+λ(a-mw-nq)，求偏导联立求解。上海高考导数部分涉及最值应用题。'},{text:'线性规划问题',correct:false},{text:'概率统计中的假设检验',correct:false},{text:'数列的极限问题',correct:false}] },
-    { subject:'数学', text:'【多选】关于向量，以下说法正确的有？', multi:true, choices:[{text:'a⊥b的充要条件是a·b=0',correct:true,knowledge:'数学·向量（上海高考）：向量坐标运算、数量积、向量垂直/平行的判定条件是高考必考内容。'},{text:'|a+b|≤|a|+|b|，等号成立当且仅当a与b同向',correct:true},{text:'向量a在b方向上的投影为(a·b)/|b|',correct:true},{text:'任意两个向量都可以相加得到新的向量',correct:false}] },
+    { subject:'数学', text:'【多选】关于向量，以下说法正确的有？', multi:true, choices:[{text:'a⊥b的充要条件是a·b=0',correct:true,knowledge:'数学·向量（上海高考）：向量坐标运算、数量积、向量垂直/平行的判定条件是高考必考内容。'},{text:'|a+b|≤|a|+|b|，等号成立当且仅当a与b同向',correct:true,knowledge:'数学·向量（上海高考）：三角不等式是向量模长运算的基本性质，等号成立条件对应向量共线同向。'},{text:'向量a在b方向上的投影为(a·b)/|b|',correct:true,knowledge:'数学·向量（上海高考）：向量投影公式是数量积的几何意义之一，也是高考常考的知识点。'},{text:'任意两个向量都可以相加得到新的向量',correct:false}] },
     { subject:'数学', type:'fill', text:'若随机变量X服从二项分布B(10, 0.3)，则X的方差D(X)=______。', answer:'2.1', answers:['2.1'], knowledge:'数学·概率统计（上海高考）：二项分布B(n,p)的方差D(X)=np(1-p)=10×0.3×0.7=2.1。' },
     // --- 新增物理题 ---
     { subject:'物理', text:'太空电梯的缆绳在接近地球同步轨道高度时需要承受极大张力，材料必须具有极高的比强度（强度/密度）。碳纳米管的抗拉强度可达约63GPa，密度约1.3g/cm³。若缆绳长度为36000km，其在地面端的应力约为？（假设g=10m/s²，不计材料自重变化）', choices:[{text:'约468GPa',correct:true,knowledge:'物理·力学（沪教版·等级考）：均匀缆绳自重产生的最大应力在悬挂点处，σ=ρLg。目前尚无材料能满足太空电梯的强度要求。'},{text:'约46.8GPa',correct:false},{text:'约4.68GPa',correct:false},{text:'约4680GPa',correct:false}] },
@@ -385,7 +385,7 @@ function initAllGrades() {
         { grade:'高一', subject:'英语', text:'Which of the following sentences is grammatically CORRECT?', choices:[{text:'She has been working here since 2020.',correct:true,knowledge:'英语·时态（高一·语法）：现在完成进行时 have/has been doing 表示从过去开始持续到现在的动作。'},{text:'She has worked here since five years.',correct:false},{text:'She is working here since 2020.',correct:false},{text:'She worked here since 2020.',correct:false}] }
     );
     QUESTIONS.journalist.cyberpunk.push(
-        { grade:'高一', subject:'英语', type:'fill', text:'Artificial Intelligence ______ (缩写为AI) is transforming the media industry.', answer:'abbreviated', answers:['abbreviated','shortened'], knowledge:'英语·词汇（高一）：abbreviated as = 缩写为，被动语态。' }
+        { grade:'高一', subject:'英语', type:'fill', text:'Artificial Intelligence, often ______ (abbreviate) AI, is transforming the media industry.', answer:'abbreviated', answers:['abbreviated','shortened'], knowledge:'英语·词汇（上海高考·非谓语动词）："缩写为"用abbreviated as，过去分词短语作插入语/同位语。abbreviate为及物动词，此处用被动语态表示"被缩写为"。AI是Artificial Intelligence的首字母缩略词。' }
     );
 
     // --- 记者·高二补充 ---
@@ -772,14 +772,14 @@ function showSceneIntro(eraKey, eraIdx) {
 }
 
 /** 渲染选择题选项 */
-function renderChoices(q) {
+function renderChoices(q, noShuffle) {
     answered = false;
     selected = [];
     var grid = document.getElementById('options-grid');
     grid.innerHTML = '';
 
-    // 随机打乱选项顺序，避免正确答案总在 A
-    shuffleArray(q.choices);
+    // 随机打乱选项顺序，避免正确答案总在 A（noShuffle 为 true 时保留原顺序，用于重做返回后恢复界面）
+    if (!noShuffle) shuffleArray(q.choices);
 
     var qType = getQType(q);
     var correctCount = q.choices.filter(function(c) { return c.correct; }).length;
