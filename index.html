@@ -58,6 +58,29 @@
 /* ---- 赛博数据 ---- */
 .font-data{font-family:'Share Tech Mono','DotGothic16',monospace}
 
+/* ---- 称号展示 ---- */
+#title-display{text-align:center;margin-bottom:8px;
+  max-width:380px;margin-left:auto;margin-right:auto}
+#title-display .title-text{font-family:'ZCOOL QingKe HuangYou','DotGothic16','Microsoft YaHei',cursive;
+  font-size:1.05rem;letter-spacing:2px;margin-bottom:2px;
+  display:inline-block;padding:2px 0}
+#title-display .title-stars{font-size:0.75rem;color:#555;letter-spacing:1px}
+
+/* ---- 声明 & 玩法按钮（右上角） ---- */
+#btn-about{position:fixed;top:4px;right:8px;z-index:998;
+  background:rgba(255,210,0,0.08);border:1px solid rgba(255,210,0,0.15);
+  color:rgba(255,210,0,0.6);cursor:pointer;font-size:0.65rem;
+  padding:4px 10px;border-radius:6px;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif;letter-spacing:1px}
+#btn-about:hover{color:#ffd200;background:rgba(255,210,0,0.15);
+  border-color:rgba(255,210,0,0.3);transform:translateY(-1px)}
+
+/* ---- 水印（底部） ---- */
+#watermark{position:fixed;bottom:4px;left:0;width:100%;
+  font-size:0.55rem;color:rgba(255,255,255,0.1);letter-spacing:0.5px;
+  pointer-events:none;z-index:999;font-family:'DotGothic16','Microsoft YaHei',sans-serif;
+  line-height:1.4;user-select:none;text-align:center}
+
 /* ---- 经典暗色主题 ---- */
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei','PingFang SC',sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;font-size:16px;letter-spacing:0.03em;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -224,13 +247,193 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
 #lv-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,210,0,0.3)}
 .lv-particle{position:fixed;width:8px;height:8px;border-radius:50%;z-index:301;
   animation:lvConfetti 2.5s linear forwards;pointer-events:none}
+
+/* ---- 免责/玩法弹窗 ---- */
+#disclaimer-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:600;
+  background:rgba(0,0,0,0.88);display:none;justify-content:center;align-items:center}
+#disclaimer-modal.show{display:flex}
+#disclaimer-inner{background:linear-gradient(135deg,#1a1a3e,#0d0d2e);
+  border:2px solid rgba(255,210,0,0.3);border-radius:16px;padding:0;
+  max-width:520px;width:92%;max-height:85vh;display:flex;flex-direction:column}
+#disclaimer-header{padding:16px 20px 10px;border-bottom:1px solid rgba(255,210,0,0.1);
+  text-align:center}
+#disclaimer-header h3{color:#ffd200;font-size:1rem;margin-bottom:2px}
+#disclaimer-header .sub{color:#8892b0;font-size:0.75rem}
+#disclaimer-body{overflow-y:auto;padding:14px 20px;flex:1;min-height:0}
+#disclaimer-body h4{color:#ffd200;font-size:0.85rem;margin:10px 0 6px}
+#disclaimer-body p{color:#b0b8c8;font-size:0.8rem;line-height:1.7;margin-bottom:6px}
+#disclaimer-body ul{padding-left:16px;margin-bottom:8px}
+#disclaimer-body li{color:#b0b8c8;font-size:0.78rem;line-height:1.6;margin-bottom:4px}
+#disclaimer-body li strong{color:#c0c8d8}
+#disclaimer-footer{padding:12px 20px 16px;border-top:1px solid rgba(255,210,0,0.1);
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+#disclaimer-footer .hint{font-size:0.7rem;color:#666}
+#btn-acknowledge{background:rgba(255,210,0,0.12);border:1px solid rgba(255,210,0,0.25);
+  border-radius:8px;padding:8px 32px;font-size:0.85rem;color:#666;cursor:not-allowed;
+  transition:all 0.3s;font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#btn-acknowledge.ready{background:linear-gradient(135deg,#ffd200,#ff9a00);
+  border-color:transparent;color:#1a1a2e;cursor:pointer;font-weight:700}
+#btn-acknowledge.ready:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,210,0,0.3)}
+#disclaimer-scroll-progress{width:100%;height:2px;background:#2a2a4a;border-radius:1px}
+#disclaimer-scroll-progress .fill{height:100%;background:linear-gradient(90deg,#ffd200,#ff6a00);
+  border-radius:1px;transition:width 0.2s;width:0%}
+
+/* ---- 存档弹窗 ---- */
+#save-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:500;
+  background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center}
+#save-modal.show{display:flex}
+#save-modal-inner{background:linear-gradient(135deg,#1a1a3e,#0d0d2e);
+  border:2px solid #ffd200;border-radius:20px;padding:32px 28px;
+  max-width:400px;width:90%;text-align:center;position:relative}
+#save-modal-inner h3{color:#ffd200;font-size:1.2rem;margin-bottom:12px}
+#save-modal-inner p{color:#b0b8c8;font-size:0.9rem;line-height:1.7;margin-bottom:16px}
+#save-modal-close{position:absolute;top:12px;right:14px;font-size:1.1rem;
+  color:#8892b0;background:none;border:none;cursor:pointer;padding:4px 8px;
+  border-radius:4px;transition:all 0.2s}
+#save-modal-close:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.save-modal-btn{padding:10px 28px;font-size:0.95rem;font-weight:700;
+  border-radius:10px;cursor:pointer;transition:all 0.2s;margin:4px 6px;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+.save-modal-btn.primary{background:linear-gradient(135deg,#ffd200,#ff9a00);
+  border:none;color:#1a1a2e}
+.save-modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,210,0,0.3)}
+.save-modal-btn.secondary{background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);color:#b0b8c8}
+.save-modal-btn.secondary:hover{background:rgba(255,255,255,0.15);color:#fff}
+#save-modal-record{font-size:0.8rem;color:#666;margin-top:12px}
+
+/* ---- 错题面板 ---- */
+#wrong-panel{display:none;margin-top:14px;max-width:500px;margin-left:auto;margin-right:auto;
+  text-align:left}
+#wrong-panel.show{display:block}
+#wrong-toggle{background:none;border:none;color:#8892b0;cursor:pointer;
+  font-size:1.2rem;padding:4px 12px;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#wrong-toggle:hover{color:#ffd200;transform:translateY(2px)}
+#wrong-panel h4{color:#ffd200;font-size:0.85rem;margin:10px 0 6px;padding-bottom:4px;
+  border-bottom:1px solid rgba(255,210,0,0.1)}
+.wrong-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);
+  border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:0.78rem;color:#b0b8c8;
+  line-height:1.5}
+.wrong-item .wi-subject{color:#ffd200;font-size:0.7rem;font-weight:700}
+.wrong-export-btns{display:flex;gap:6px;margin-top:10px}
+.wrong-export-btns button{flex:1;padding:6px 10px;font-size:0.75rem;font-weight:700;
+  border-radius:6px;cursor:pointer;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+.wrong-export-btns .export-print{background:rgba(52,152,219,0.15);color:#3498db;
+  border:1px solid rgba(52,152,219,0.3)}
+.wrong-export-btns .export-print:hover{background:rgba(52,152,219,0.25)}
+.wrong-export-btns .export-ans{background:rgba(46,204,113,0.15);color:#2ecc71;
+  border:1px solid rgba(46,204,113,0.3)}
+.wrong-export-btns .export-ans:hover{background:rgba(46,204,113,0.25)}
+.no-wrong{text-align:center;color:#666;font-size:0.8rem;padding:20px 0}
+
+/* ---- 记录展示条 ---- */
+.record-bar{text-align:center;margin-top:18px;padding:10px 14px;
+  background:rgba(255,210,0,0.06);border:1px solid rgba(255,210,0,0.12);
+  border-radius:10px;font-size:0.85rem;color:#8892b0;
+  display:flex;justify-content:center;align-items:center;gap:12px}
+.record-bar .star{color:#ffd200;font-weight:700}
+.save-btn{background:rgba(255,210,0,0.1);border:1px solid rgba(255,210,0,0.3);
+  color:#ffd200;padding:6px 16px;border-radius:8px;cursor:pointer;
+  font-size:0.85rem;font-family:'DotGothic16','Microsoft YaHei',sans-serif;
+  transition:all 0.2s}
+.save-btn:hover{background:rgba(255,210,0,0.2)}
+
+/* ---- 登录弹窗 ---- */
+#login-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:700;
+  background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center}
+#login-modal.show{display:flex}
+#login-inner{background:linear-gradient(135deg,#1a1a3e,#0d0d2e);
+  border:2px solid rgba(255,210,0,0.3);border-radius:20px;padding:36px 32px 28px;
+  max-width:420px;width:92%;text-align:center}
+#login-inner .login-title{font-size:1.5rem;color:#ffd200;font-weight:700;margin-bottom:4px;
+  font-family:'Orbitron','DotGothic16',sans-serif}
+#login-inner .login-sub{font-size:0.78rem;color:#8892b0;margin-bottom:20px}
+#login-inner input{width:100%;padding:12px 16px;font-size:1rem;
+  background:#1a1a2e;color:#fff;border:2px solid rgba(255,210,0,0.2);
+  border-radius:10px;outline:none;text-align:center;margin-bottom:14px;
+  transition:border-color 0.3s;font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#login-inner input:focus{border-color:#ffd200}
+#login-inner .login-btn{width:100%;padding:12px;font-size:1.05rem;font-weight:700;
+  background:linear-gradient(135deg,#ffd200,#ff9a00);border:none;border-radius:10px;
+  color:#1a1a2e;cursor:pointer;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#login-inner .login-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,210,0,0.3)}
+#login-inner .login-error{color:#e74c3c;font-size:0.78rem;margin-top:8px;display:none}
+#login-accounts{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,210,0,0.1)}
+#login-accounts .la-label{font-size:0.72rem;color:#666;margin-bottom:8px}
+#login-accounts .la-list{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+#login-accounts .la-item{padding:5px 14px;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#b0b8c8;
+  cursor:pointer;font-size:0.8rem;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#login-accounts .la-item:hover{background:rgba(255,210,0,0.12);border-color:rgba(255,210,0,0.3);color:#ffd200}
+
+/* ---- 账户栏（职业选择页顶部） ---- */
+#account-bar{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;padding:6px 12px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);border-radius:8px;font-size:0.8rem}
+#account-bar .ab-user{color:#b0b8c8}
+#account-bar .ab-user strong{color:#ffd200}
+#account-bar .ab-btn{background:none;border:none;color:#666;cursor:pointer;
+  font-size:0.72rem;padding:2px 8px;border-radius:4px;transition:all 0.2s;
+  font-family:'DotGothic16','Microsoft YaHei',sans-serif}
+#account-bar .ab-btn:hover{color:#e74c3c;background:rgba(231,76,60,0.1)}
+
+/* ---- 账户切换确认弹窗 ---- */
+#switch-confirm-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:750;
+  background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center}
+#switch-confirm-modal.show{display:flex}
+#switch-confirm-inner{background:linear-gradient(135deg,#1a1a3e,#0d0d2e);
+  border:2px solid #ffd200;border-radius:20px;padding:28px 24px;
+  max-width:380px;width:90%;text-align:center}
+#switch-confirm-inner h3{color:#ffd200;font-size:1rem;margin-bottom:10px}
+#switch-confirm-inner p{color:#b0b8c8;font-size:0.82rem;line-height:1.7;margin-bottom:16px}
+
 </style>
 </head>
 <body>
 <div id="app">
 
+<div id="watermark">总制作 61Louisa（xm2805-lyc）｜特别鸣谢 xm2806-lym、xm2805-ysy、xm2807-lxc</div>
+<button id="btn-about" onclick="showDisclaimer(true)">📜 声明 & 玩法</button>
+
+<!-- ===== 登录弹窗 ===== -->
+<div id="login-modal">
+  <div id="login-inner">
+    <div class="login-title">明日基石</div>
+    <div class="login-sub">欢迎回来，请输入你的名称</div>
+    <input id="login-input" type="text" placeholder="输入你的名字…" maxlength="12"
+      onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">⚡ 进入游戏</button>
+    <div class="login-error" id="login-error">请输入有效名称</div>
+    <div id="login-accounts" style="display:none">
+      <div class="la-label">—— 已有账号，点击切换 ——</div>
+      <div class="la-list" id="login-account-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 账户切换确认弹窗 ===== -->
+<div id="switch-confirm-modal">
+  <div id="switch-confirm-inner">
+    <h3>⚠ 切换账号</h3>
+    <p>切换后当前答题进度将丢失。<br>建议先<strong style="color:#ffd200;">保存进度</strong>，再切换。</p>
+    <div>
+      <button class="save-modal-btn primary" onclick="confirmSwitchAccount()">切换</button>
+      <button class="save-modal-btn secondary" onclick="closeSwitchConfirm()">取消</button>
+    </div>
+  </div>
+</div>
+
 <!-- 职业选择 -->
 <div id="career-select">
+  <div id="account-bar" style="display:none">
+    <span class="ab-user">👤 <strong id="ab-username"></strong></span>
+    <button class="ab-btn" onclick="showLoginModal(true)">切换账号</button>
+  </div>
+  <div id="title-display"></div>
   <div class="game-title">
     <div class="title-chinese">明日基石</div>
     <div class="title-english">Foundation of Tomorrow</div>
@@ -243,6 +446,23 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
     <button class="grade-btn" data-grade="3" onclick="selectGrade(this,3)">高三</button>
   </div>
   <div class="cards" id="career-cards"></div>
+  <div class="record-bar" id="career-record" style="display:none">
+    <span>🏆 历史最高</span>
+    <span class="star" id="career-record-level">Lv.-</span>
+    <span class="star" id="career-record-score">⭐-</span>
+    <button class="save-btn" onclick="saveSilently(this)">📁 保存</button>
+  </div>
+  <div style="text-align:center;margin-top:6px">
+    <button id="wrong-toggle" onclick="toggleWrongPanel()">▼</button>
+  </div>
+  <div id="wrong-panel">
+    <div id="wrong-panel-inner"></div>
+  </div>
+  <div style="text-align:center;margin-top:10px">
+    <button onclick="showClearConfirm()" style="background:none;border:none;color:#555;cursor:pointer;font-size:0.75rem;font-family:'DotGothic16','Microsoft YaHei',sans-serif;padding:4px 8px;border-radius:4px;transition:all 0.2s"
+      onmouseover="this.style.color='#e74c3c';this.style.background='rgba(231,76,60,0.1)'"
+      onmouseout="this.style.color='#555';this.style.background='none'">🗑 清空历史记录</button>
+  </div>
 </div>
 
 <!-- 游戏区 -->
@@ -271,8 +491,113 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
 <div id="result-area">
   <div id="result-career"></div>
   <div id="result-stats"></div>
+  <div class="record-bar" id="result-record">
+    <span>🏆 历史最高</span>
+    <span class="star" id="result-record-level">Lv.-</span>
+    <span class="star" id="result-record-score">⭐-</span>
+    <button class="save-btn" onclick="saveSilently(this)">📁 保存记录</button>
+  </div>
   <button id="btn-restart">🔄 重新开始</button>
   <button id="btn-records-result" onclick="showRecordsWindow()">📖 查看本次答题记录</button>
+</div>
+
+<!-- 退出确认弹窗 -->
+<div id="save-modal">
+  <div id="save-modal-inner">
+    <button id="save-modal-close" onclick="closeSaveModal()">✕</button>
+    <h3>⚠ 确认操作</h3>
+    <p>退出后当前答题进度将丢失。<br>建议先<strong style="color:#ffd200;">保存进度</strong>，再离开。</p>
+    <div>
+      <button class="save-modal-btn primary" onclick="saveAndStay()">📁 保存进度</button>
+      <button class="save-modal-btn secondary" onclick="closeModalAndExit()">离开</button>
+    </div>
+    <div id="save-modal-record">当前最高记录：Lv.- | ⭐-</div>
+  </div>
+</div>
+
+<!-- 免责声明 + 玩法介绍 -->
+<div id="disclaimer-modal">
+  <div id="disclaimer-inner">
+    <div id="disclaimer-header">
+      <h3>📜 免责声明 & 玩法介绍</h3>
+      <div class="sub">请仔细阅读以下内容</div>
+    </div>
+    <div id="disclaimer-body" onscroll="updateDisclaimerProgress()">
+      <h4>🎯 核心玩法</h4>
+      <p>《明日基石》（Foundation of Tomorrow）是一款知识答题驱动的时代穿越游戏。你将在三个历史时代中扮演不同职业角色，用专业知识答对题目，推进文明进程。</p>
+
+      <h4>👥 职业选择</h4>
+      <p>游戏提供<strong>五种职业</strong>，对应不同学科组合：</p>
+      <ul>
+        <li><strong>🌾 农民</strong> — 化学 + 政治</li>
+        <li><strong>📰 记者</strong> — 语文 + 英语</li>
+        <li><strong>💉 医生</strong> — 生物 + 地理</li>
+        <li><strong>💻 程序员</strong> — 信息科技 + 历史</li>
+        <li><strong>🔧 工程师</strong> — 数学 + 物理</li>
+      </ul>
+      <p>每种职业都对应上海高考相关科目，答题范围与等级考/合格考知识点一致。</p>
+
+      <h4>📝 答题机制</h4>
+      <ul>
+        <li><strong>单选题</strong>：四个选项中选一个正确答案</li>
+        <li><strong>不定项选择题</strong>：1~2 个正确答案，漏选得 5 分</li>
+        <li><strong>多选题</strong>：2~3 个正确答案，需全部选对得 10 分</li>
+        <li><strong>填空题</strong>：手动输入答案，正确得 5 分</li>
+      </ul>
+
+      <h4>⏳ 时代推进</h4>
+      <p>答对题目获得⭐星星，每推进一个时代（5 题）后进入下一时代：<strong>1950s-1970s农耕 → 1990s-2050s工业 → 2080s赛博</strong>。每个时代有独特的背景情景和题目风格。</p>
+
+      <h4>⭐ 评分 & 称号</h4>
+      <ul>
+        <li>每题满分 10 分（填空题 5 分），总分 150 分</li>
+        <li>每 50 分升一级，进度条显示级距</li>
+        <li><strong>累计星星</strong>每 300 星解锁一个称号，称号会显示在开始页面</li>
+        <li>历史最高分自动保存，可随时查看</li>
+      </ul>
+
+      <h4>🖱 操作方式</h4>
+      <p>鼠标点击选择/提交答案，键盘输入填空题答案。游戏进度支持手动存档和自动保存最高记录。</p>
+
+      <h4>❌ 错题本</h4>
+      <p>错题本会自动记录所有答错或未完全答对的题目。在开始页面点击 <strong>▼</strong> 展开错题面板，可以查看错题摘要。</p>
+      <ul>
+        <li><strong>未掌握</strong>：从未答对过的题目，以正常亮度显示</li>
+        <li><strong>已掌握</strong>：曾经答错过但之后答对过的题目，以半透明显示</li>
+      </ul>
+      <p>错题面板底部提供<strong>导出打印</strong>功能：</p>
+      <ul>
+        <li><strong>📝 导出有解析版</strong>：包含题目、选项、正确答案和知识点解析，适合打印后对照复习</li>
+        <li><strong>🖨 导出无解析版</strong>：仅含题目和选项，不显示答案，适合打印后自测练习</li>
+      </ul>
+      <p>导出文件为 HTML 格式，打开后可使用浏览器打印功能。错题本数据保存在本地浏览器中，不会丢失。</p>
+
+      <h4 style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,210,0,0.1)">⚖ 免责声明</h4>
+
+      <p><strong>1. 教育用途声明</strong><br>
+      本游戏为历史教育辅助工具，旨在通过互动答题帮助高中生巩固学科知识，不构成任何形式的正式教学或考试评价。</p>
+
+      <p><strong>2. 历史准确性说明</strong><br>
+      游戏中的历史背景基于公开教材和史料（含沪教版/上海高考考纲），部分情节为游戏化演绎，不完全等同于真实历史。如有出入，以权威教材和史料为准。</p>
+
+      <p><strong>3. 知识范围声明</strong><br>
+      题目内容参考上海高考考纲及等级考要求，但因考纲不断更新，本游戏不保证完全覆盖所有考点。建议结合教材使用。</p>
+
+      <p><strong>4. 数据隐私声明</strong><br>
+      本游戏为纯前端应用，所有游戏数据仅存储在用户本地浏览器中，不收集、不上传任何个人信息至任何服务器。</p>
+
+      <p><strong>5. 第三方资源声明</strong><br>
+      游戏中使用的字体（Orbitron、DotGothic16、ZCOOL QingKe HuangYou等）均遵循开源许可协议（SIL OFL / Apache 2.0），可免费商用。</p>
+
+      <p><strong>6. 最终解释权</strong><br>
+      保留对游戏内容的最终解释权。如有疑问或建议，欢迎联系开发者：2681597613@qq.com</p>
+    </div>
+    <div id="disclaimer-footer">
+      <div id="disclaimer-scroll-progress"><div class="fill" id="disclaimer-progress-fill"></div></div>
+      <div class="hint" id="disclaimer-hint">请向下滑动浏览全部内容</div>
+      <button id="btn-acknowledge" disabled onclick="closeDisclaimer()">我已知悉</button>
+    </div>
+  </div>
 </div>
 
 </div>
@@ -335,6 +660,439 @@ function updateStatsDisplay() {
   document.getElementById('stats-display').textContent = 'Lv.' + getLevel(GameState.score) + ' | ⭐' + GameState.score;
 }
 
+// --- 单题重做模式 ---
+var _retrySingleMode = false;
+var _retrySingleBackup = null;
+
+// --- 称号系统（每300星解锁一个，不重复"明日基石"四字，三色渐变）---
+var TITLES = [
+  { min: 0,    title: '',        colors: [] },
+  { min: 300,  title: '勤学不辍的',  colors:['#ff3b30','#ff9500','#ffcc00'] },
+  { min: 600,  title: '探赜索隐的',  colors:['#ff9500','#ffcc00','#a8cc00'] },
+  { min: 900,  title: '积微成著的',  colors:['#ffcc00','#a8cc00','#34c759'] },
+  { min: 1200, title: '笃志力行的',  colors:['#a8cc00','#34c759','#00c7be'] },
+  { min: 1500, title: '洞明事理的',  colors:['#34c759','#00c7be','#30d0e0'] },
+  { min: 1800, title: '博闻广见的',  colors:['#00c7be','#30d0e0','#5ac8fa'] },
+  { min: 2100, title: '厚积待发的',  colors:['#30d0e0','#5ac8fa','#007aff'] },
+  { min: 2400, title: '融会贯通的',  colors:['#5ac8fa','#007aff','#5856d6'] },
+  { min: 2700, title: '传薪续火的',  colors:['#007aff','#5856d6','#af52de'] },
+  { min: 3000, title: '器识宏通的',  colors:['#5856d6','#af52de','#ff2d55'] },
+  { min: 3300, title: '德才兼备的',  colors:['#af52de','#ff2d55','#ff6b8a'] },
+  { min: 3600, title: '星火燎原的',  colors:['#ff2d55','#ff6b8a','#ffd700'] },
+  { min: 3900, title: '前程可期的',  colors:['#ff6b8a','#ffd700','#ffffff'] },
+  { min: 4200, title: '历久弥新的',  colors:['#ffd700','#ffffff','#ffd700'] },
+  { min: 4800, title: '光照未来的',  colors:['#ffffff','#ffd700','#ffffff'] }
+];
+function getTitle(totalStars) {
+  if (totalStars <= 0) return { title: '', colors: [] };
+  var result = TITLES[TITLES.length - 1];
+  for (var i = TITLES.length - 1; i >= 0; i--) {
+    if (totalStars >= TITLES[i].min) { result = TITLES[i]; break; }
+  }
+  return result;
+}
+function updateTitleDisplay() {
+  var data = loadSaveData();
+  var total = data.totalStars || 0;
+  var tEl = document.getElementById('title-display');
+  if (!tEl) return;
+  if (total < 300) {
+    tEl.style.display = 'none';
+    return;
+  }
+  tEl.style.display = 'block';
+  var info = getTitle(total);
+  var nextMilestone = 300;
+  for (var i = 0; i < TITLES.length; i++) {
+    if (TITLES[i].min > total) { nextMilestone = TITLES[i].min; break; }
+  }
+  var gradient = 'linear-gradient(135deg,' + info.colors.join(',') + ')';
+  tEl.innerHTML =
+    '<div class="title-stars" style="margin-bottom:3px">⭐ ' + total + '　→　' + nextMilestone + '⭐</div>' +
+    '<div class="title-text" style="background:' + gradient + ';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + info.title + '明日基石</div>';
+  data._cachedTitle = info.title;
+}
+function showClearConfirm() {
+  if (confirm('确定清空所有历史记录？\n包括称号、历史最高分、答题记录等将全部删除。\n此操作不可恢复！')) {
+    try { localStorage.removeItem('foundation_of_tomorrow_save'); } catch(e) {}
+    try { localStorage.removeItem('lifeSimulator_records'); } catch(e) {}
+    updateTitleDisplay();
+    updateRecordDisplay();
+    document.getElementById('career-record').style.display = 'none';
+  }
+}
+
+// --- 错题面板 ---
+function toggleWrongPanel() {
+  var panel = document.getElementById('wrong-panel');
+  var arrow = document.getElementById('wrong-toggle');
+  if (panel.classList.contains('show')) {
+    panel.classList.remove('show');
+    arrow.textContent = '▼';
+  } else {
+    panel.classList.add('show');
+    arrow.textContent = '▲';
+    renderWrongPanel();
+  }
+}
+function isRecordRedone(record, allRecords) {
+  // 该题之后是否存在正确记录
+  for (var i = 0; i < allRecords.length; i++) {
+    var r = allRecords[i];
+    if (r.timestamp > record.timestamp && r.text === record.text && r.correct) {
+      return true;
+    }
+  }
+  return false;
+}
+function renderWrongPanel() {
+  var all = loadAllRecords();
+  // 按题目文本去重
+  var seen = {};
+  var uniqueRecords = [];
+  all.forEach(function(r) {
+    var key = (r.text || '').trim();
+    if (!seen[key]) { seen[key] = true; uniqueRecords.push(r); }
+  });
+  var done = [], undone = [];
+  uniqueRecords.forEach(function(r) {
+    if (r.correct && !r.partial) return;
+    if (isRecordRedone(r, all)) done.push(r);
+    else undone.push(r);
+  });
+  if (undone.length === 0 && done.length === 0) {
+    document.getElementById('wrong-panel-inner').innerHTML = '<div class="no-wrong">🎉 暂无错题</div>';
+    return;
+  }
+  var html = '';
+  if (undone.length > 0) {
+    html += '<h4>❌ 未掌握（' + undone.length + '题）</h4>';
+    undone.forEach(function(r) {
+      html += '<div class="wrong-item" style="cursor:pointer" onclick="retrySingle(' + r.timestamp + ')">';
+      html += '<div><span class="wi-subject">[' + (r.subject || '') + ']</span></div>';
+      html += '<div style="font-size:0.75rem;margin-top:2px">' + (r.text || '').slice(0, 80) + '</div>';
+      html += '</div>';
+    });
+  }
+  if (done.length > 0) {
+    html += '<h4 style="margin-top:14px">✅ 已掌握（' + done.length + '题）</h4>';
+    done.forEach(function(r) {
+      html += '<div class="wrong-item" style="opacity:0.5;cursor:pointer" onclick="retrySingle(' + r.timestamp + ')">';
+      html += '<div><span class="wi-subject">[' + (r.subject || '') + ']</span></div>';
+      html += '<div style="font-size:0.75rem;margin-top:2px">' + (r.text || '').slice(0, 80) + '</div>';
+      html += '</div>';
+    });
+  }
+  html += '<div class="wrong-export-btns">';
+  html += '<button class="export-print" onclick="exportWrongQuestions(false)">🖨 导出无解析版</button>';
+  html += '<button class="export-ans" onclick="exportWrongQuestions(true)">📝 导出有解析版</button>';
+  html += '</div>';
+  document.getElementById('wrong-panel-inner').innerHTML = html;
+}
+function retrySingle(timestamp) {
+  var all = loadAllRecords();
+  var record = null;
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].timestamp === timestamp) { record = all[i]; break; }
+  }
+  if (!record) return;
+  // 备份当前视图
+  _retrySingleBackup = {
+    careerSelectDisplay: document.getElementById('career-select').style.display
+  };
+  // 备份并覆盖 onNextQuestion
+  _origOnNextQuestion = typeof onNextQuestion === 'function' ? onNextQuestion : null;
+  onNextQuestion = function() {
+    _retrySingleMode = false;
+    onNextQuestion = _origOnNextQuestion || function(){};
+    document.getElementById('career-select').style.display = _retrySingleBackup.careerSelectDisplay || 'block';
+    document.getElementById('game-area').style.display = 'none';
+    document.getElementById('top-bar').style.display = '';
+    document.getElementById('btn-next').textContent = '下一题 ➤';
+    document.getElementById('btn-next').disabled = true;
+    _retrySingleBackup = null;
+    renderWrongPanel();
+  };
+  _retrySingleMode = true;
+  // 切换到游戏区
+  document.getElementById('career-select').style.display = 'none';
+  document.getElementById('game-area').style.display = 'block';
+  document.getElementById('top-bar').style.display = 'none';
+  document.getElementById('btn-next').textContent = '✅ 返回错题本';
+  document.getElementById('btn-next').disabled = true;
+  // 构建题目
+  var q = { text: record.text, subject: record.subject || '' };
+  if (record.choices && record.choices.length > 0) {
+    q.choices = record.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; });
+  }
+  currentQ = q; answered = false; selected = [];
+  setQuestionText(q.text);
+  document.getElementById('question-feedback').innerHTML = '';
+  document.getElementById('options-grid').innerHTML = '';
+  if (record.answer && !record.choices) {
+    q.answer = record.answer;
+    q.answers = record.answers;
+    renderFill(q);
+  } else {
+    renderChoices(q);
+  }
+}
+function getCorrectText(record) {
+  if (record.choices && record.choices.length > 0) {
+    var labels = 'ABCDEFGH';
+    var correctLabels = [];
+    record.choices.forEach(function(c, i) {
+      if (c.correct) correctLabels.push(labels[i] + '. ' + c.text);
+    });
+    return correctLabels.join('　');
+  }
+  return record.answer || '';
+}
+function exportWrongQuestions(includeAnswer) {
+  var all = loadAllRecords();
+  // 按题目文本去重
+  var seen = {};
+  var wrong = [];
+  all.forEach(function(r) {
+    if (r.correct && !r.partial) return;
+    var key = (r.text || '').trim();
+    if (!seen[key]) { seen[key] = true; wrong.push(r); }
+  });
+  if (wrong.length === 0) { alert('暂无错题可导出'); return; }
+  var title = includeAnswer ? '错题集（含解析）' : '错题集（无解析·练习版）';
+  var html = '<!DOCTYPE html><html><head><meta charset="utf-8">';
+  html += '<title>' + title + '</title>';
+  html += '<style>body{font-family:serif;padding:30px;color:#333;font-size:14px;line-height:1.8}';
+  html += 'h1{text-align:center;font-size:20px;margin-bottom:20px}';
+  html += '.q{margin-bottom:18px;page-break-inside:avoid}';
+  html += '.s{color:#888;font-size:12px}.a{color:#2e7d32;font-weight:700;margin-top:4px}';
+  html += '.k{color:#666;font-size:12px;margin-left:14px;border-left:2px solid #ddd;padding-left:8px}';
+  html += '.no-print{display:none}';
+  html += '@media print{body{padding:15px;font-size:12px}}';
+  html += '</style></head><body>';
+  html += '<h1>📖 明日基石 · ' + title + '</h1>';
+  html += '<p style="text-align:center;color:#aaa;font-size:12px">共 ' + wrong.length + ' 题</p>';
+  wrong.forEach(function(r, i) {
+    html += '<div class="q">';
+    html += '<div><strong>' + (i+1) + '.</strong> <span class="s">[' + (r.subject || '') + ']</span></div>';
+    html += '<div>' + (r.text || '') + '</div>';
+    if (r.choices && r.choices.length > 0) {
+      var labels = 'ABCDEFGH';
+      r.choices.forEach(function(c, j) {
+        html += '<div>' + labels[j] + '. ' + c.text + '</div>';
+      });
+    }
+    if (includeAnswer) {
+      html += '<div class="a">正确答案：' + getCorrectText(r) + '</div>';
+      if (r.knowledgeArr && r.knowledgeArr.length > 0) {
+        r.knowledgeArr.forEach(function(k) { html += '<div class="k">📚 ' + k + '</div>'; });
+      }
+    }
+    html += '</div>';
+  });
+  html += '</body></html>';
+  // 用 Blob 生成可打印 HTML，避免弹窗拦截
+  var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var w = window.open(url, '_wrongprint');
+  if (w) {
+    setTimeout(function() { try { w.print(); } catch(e) {} }, 1000);
+  } else {
+    // 弹窗被拦截，用 <a> 触发下载，用户可本地打开打印
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = (includeAnswer ? '错题集_含解析' : '错题集_练习版') + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+}
+function addGameScoreToTotal(score) {
+  var data = loadSaveData();
+  data.totalStars = (data.totalStars || 0) + score;
+  writeSaveData(data);
+  updateTitleDisplay();
+}
+
+// --- 账户系统 ---
+var ACCOUNTS_KEY = 'foundation_of_tomorrow_accounts';
+var CURRENT_USER_KEY = 'foundation_of_tomorrow_current_user';
+function loadAccounts() {
+  try { var d = localStorage.getItem(ACCOUNTS_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; }
+}
+function saveAccounts(arr) {
+  try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(arr)); } catch(e) {}
+}
+function getCurrentUser() {
+  try { return localStorage.getItem(CURRENT_USER_KEY) || ''; } catch(e) { return ''; }
+}
+function setCurrentUser(name) {
+  try { localStorage.setItem(CURRENT_USER_KEY, name); } catch(e) {}
+}
+function doLogin() {
+  var input = document.getElementById('login-input');
+  var name = (input.value || '').trim();
+  if (!name) {
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  document.getElementById('login-error').style.display = 'none';
+  // 保存或更新账号列表
+  var accounts = loadAccounts();
+  if (accounts.indexOf(name) === -1) {
+    accounts.unshift(name);
+    saveAccounts(accounts);
+  }
+  setCurrentUser(name);
+  document.getElementById('login-modal').classList.remove('show');
+  updateAccountBar();
+}
+function showLoginModal(switchMode) {
+  document.getElementById('login-modal').classList.add('show');
+  document.getElementById('login-input').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  // 显示已有账号列表
+  var accounts = loadAccounts();
+  var list = document.getElementById('login-account-list');
+  var container = document.getElementById('login-accounts');
+  if (accounts.length > 0) {
+    container.style.display = 'block';
+    list.innerHTML = accounts.map(function(a) {
+      return '<span class="la-item" onclick="selectAccount(\'' + a.replace(/'/g,"\\'") + '\')">' + a + '</span>';
+    }).join('');
+  } else {
+    container.style.display = 'none';
+  }
+  if (switchMode) {
+    document.getElementById('login-input').placeholder = '输入新账号名称…';
+  } else {
+    document.getElementById('login-input').placeholder = '输入你的名字…';
+  }
+  setTimeout(function() { document.getElementById('login-input').focus(); }, 100);
+}
+function selectAccount(name) {
+  document.getElementById('login-input').value = name;
+  doLogin();
+}
+function showSwitchConfirm() {
+  document.getElementById('switch-confirm-modal').classList.add('show');
+}
+function closeSwitchConfirm() {
+  document.getElementById('switch-confirm-modal').classList.remove('show');
+}
+function confirmSwitchAccount() {
+  closeSwitchConfirm();
+  showLoginModal(true);
+}
+function updateAccountBar() {
+  var name = getCurrentUser();
+  var bar = document.getElementById('account-bar');
+  var nameEl = document.getElementById('ab-username');
+  if (name) {
+    bar.style.display = 'flex';
+    nameEl.textContent = name;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// --- 存档 / 记录系统 ---
+var SAVE_KEY = 'foundation_of_tomorrow_save';
+function loadSaveData() {
+  try { var d = localStorage.getItem(SAVE_KEY); return d ? JSON.parse(d) : {}; } catch(e) { return {}; }
+}
+// 从答题记录中迁移历史总星数（兼容旧存档）
+function migrateTotalStars() {
+  var data = loadSaveData();
+  if (data.totalStars && data.totalStars > 0) return; // 已有新数据
+  var records = loadAllRecords();
+  var sum = 0;
+  for (var r = 0; r < records.length; r++) {
+    sum += records[r].pointEarned || 0;
+  }
+  if (sum > 0) {
+    data.totalStars = sum;
+    writeSaveData(data);
+  }
+}
+function writeSaveData(data) {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch(e) { /* quota exceeded */ }
+}
+function saveGame(highestOnly) {
+  var data = loadSaveData();
+  var curScore = typeof GameState !== 'undefined' ? (GameState.score || 0) : 0;
+  var curLevel = getLevel(curScore);
+  // 更新最高记录
+  if (curScore > (data.highestScore || 0)) {
+    data.highestScore = curScore;
+    data.highestLevel = curLevel;
+  }
+  // 如果不是仅存最高，也保存当前进度
+  if (!highestOnly) {
+    data.currentScore = curScore;
+    data.currentCareer = typeof CareerKey !== 'undefined' ? CareerKey : '';
+    data.currentRound = typeof curRound !== 'undefined' ? curRound : 0;
+    data.timestamp = Date.now();
+  }
+  writeSaveData(data);
+  updateRecordDisplay();
+}
+function saveHighestOnly() { saveGame(true); }
+function saveSilently(btn) {
+  saveGame(false);
+  // 闪一下"已保存"反馈
+  if (btn) {
+    var orig = btn.textContent;
+    btn.textContent = '✅ 已保存';
+    setTimeout(function() { btn.textContent = orig; }, 1500);
+  }
+}
+function updateRecordDisplay() {
+  updateTitleDisplay();
+  var data = loadSaveData();
+  var hs = data.highestScore || 0;
+  var hl = data.highestLevel || 1;
+  var recordText = '🏆 Lv.' + hl + ' | ⭐' + hs;
+
+  var carel = document.getElementById('career-record');
+  if (carel) {
+    document.getElementById('career-record-level').textContent = 'Lv.' + hl;
+    document.getElementById('career-record-score').textContent = '⭐' + hs;
+    if (hs > 0) carel.style.display = 'flex'; else carel.style.display = 'none';
+  }
+  var resl = document.getElementById('result-record');
+  if (resl) {
+    document.getElementById('result-record-level').textContent = 'Lv.' + hl;
+    document.getElementById('result-record-score').textContent = '⭐' + hs;
+  }
+  var mrec = document.getElementById('save-modal-record');
+  if (mrec) mrec.textContent = '当前最高记录：Lv.' + hl + ' | ⭐' + hs;
+}
+function showSaveModal() {
+  var data = loadSaveData();
+  var hs = data.highestScore || 0;
+  var hl = data.highestLevel || 1;
+  var mrec = document.getElementById('save-modal-record');
+  if (mrec) mrec.textContent = '当前最高记录：Lv.' + hl + ' | ⭐' + hs;
+  document.getElementById('save-modal').classList.add('show');
+}
+function closeSaveModal() {
+  document.getElementById('save-modal').classList.remove('show');
+}
+function closeModalAndExit() {
+  document.getElementById('save-modal').classList.remove('show');
+  document.getElementById('game-area').style.display = 'none';
+  document.getElementById('result-area').style.display = 'none';
+  document.getElementById('career-select').style.display = 'block';
+  updateRecordDisplay();
+}
+function saveAndStay() {
+  saveGame(false);
+  var mrec = document.getElementById('save-modal-record');
+  var data = loadSaveData();
+  if (mrec) mrec.textContent = '✅ 已保存！当前最高记录：Lv.' + (data.highestLevel || 1) + ' | ⭐' + (data.highestScore || 0);
+}
+
 function setSubjectLabel(t) { document.getElementById('subject-label').textContent = t; }
 function setQuestionNumber(n) {}
 function setQuestionText(t) { document.getElementById('question-text').innerHTML = t; }
@@ -345,6 +1103,8 @@ function showFeedback(html, isGood) {
 function showResult(name, level, score) {
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('result-area').style.display = 'block';
+  saveHighestOnly();
+  updateRecordDisplay();
 }
 </script>
 
@@ -370,8 +1130,10 @@ function getStats() {
   var correct = all.filter(function(r) { return r.correct; }).length;
   var wrong = all.filter(function(r) { return !r.correct && !r.partial; }).length;
   var partial = all.filter(function(r) { return r.partial; }).length;
-  var totalPoints = all.reduce(function(s, r) { return s + (r.pointEarned || 0); }, 0);
-  return { total: total, correct: correct, wrong: wrong, partial: partial, totalPoints: totalPoints };
+  // 总星级以称号系统中的累计数据为准（跨记录持久化）
+  var saveData = loadSaveData();
+  var totalStars = saveData.totalStars || all.reduce(function(s, r) { return s + (r.pointEarned || 0); }, 0);
+  return { total: total, correct: correct, wrong: wrong, partial: partial, totalPoints: totalStars };
 }
 function clearRecords() { localStorage.removeItem(STORAGE_KEY); }
 
@@ -434,22 +1196,7 @@ function showKnowledgeCard(record) {
   document.body.insertAdjacentHTML('beforeend', html);
 }
 
-function retryWrongRecord(timestamp) {
-  var all = loadAllRecords(); var record = null;
-  for (var i = 0; i < all.length; i++) { if (all[i].timestamp === timestamp) { record = all[i]; break; } }
-  if (!record || !record.choices || record.choices.length === 0) return;
-  closeRecordsWindow();
-  var q = { text: record.text, subject: record.subject || '', choices: record.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }) };
-  currentQ = q; answered = false; selected = [];
-  document.getElementById('result-area').style.display = 'none';
-  document.getElementById('game-area').style.display = 'block';
-  setSubjectLabel('🔁 错题重做 · ' + (record.subject || ''));
-  setQuestionText(q.text);
-  document.getElementById('question-feedback').innerHTML = '';
-  document.getElementById('btn-next').disabled = true;
-  document.getElementById('options-grid').innerHTML = '';
-  renderChoices(q);
-}
+
 
 function filterRecords(type) {
   var all = loadAllRecords();
@@ -469,7 +1216,6 @@ function filterRecords(type) {
     html += '<div style="font-size:11px;color:#aaa;">你选：' + userLetters + ' | 正确：' + correctLetters + '</div>';
     html += '<div style="display:flex;gap:4px;margin-top:5px;">';
     html += '<button onclick="showKnowledgeCard(loadRecordByTs(' + r.timestamp + '))" style="padding:3px 10px;font-size:12px;background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.3);border-radius:4px;color:#FFD700;cursor:pointer;">📖 知识卡片</button>';
-    if (!r.correct && r.choices && r.choices.length > 0) html += '<button onclick="retryWrongRecord(' + r.timestamp + ')" style="padding:3px 10px;font-size:12px;background:rgba(52,152,219,0.15);border:1px solid rgba(52,152,219,0.3);border-radius:4px;color:#3498db;cursor:pointer;">🔁 重做</button>';
     html += '</div></div>';
   });
   list.innerHTML = html;
@@ -490,7 +1236,32 @@ function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < al
   var _origCheck = checkAnswer;
   checkAnswer = function(q, singleBtn) {
     var userSel = selected.slice();
-    _origCheck(q, singleBtn);
+    if (_retrySingleMode) {
+      // 重做模式：视觉反馈 + 显示解析，不升级
+      var btns = document.querySelectorAll('#options-grid .choice-btn');
+      btns.forEach(function(b) { b.disabled = true; });
+      q.choices.forEach(function(c, i) {
+        if (c.correct) btns[i].classList.add('correct');
+        else if (userSel.indexOf(i) !== -1) btns[i].classList.add('wrong');
+      });
+      document.getElementById('btn-next').disabled = false;
+      // 显示解析
+      var correctIdxR = [];
+      q.choices.forEach(function(c, i) { if (c.correct) correctIdxR.push(i); });
+      var aAll = userSel.length === correctIdxR.length && correctIdxR.every(function(ci) { return userSel.indexOf(ci) !== -1; });
+      var aHasWrong = userSel.some(function(si) { return correctIdxR.indexOf(si) === -1; });
+      var aGotSome = userSel.some(function(si) { return correctIdxR.indexOf(si) !== -1; });
+      var labels = correctIdxR.map(function(ci) { return String.fromCharCode(65 + ci); }).join('、');
+      var fb = '', fbColor = '#ff6b6b';
+      if (aAll) { fb = '✅ 完全正确！答案：' + labels; fbColor = '#00ff80'; }
+      else if (aGotSome && !aHasWrong) { fb = '⚠ 部分正确（漏选），答案：' + labels; fbColor = '#f1c40f'; }
+      else if (aGotSome) { fb = '⚠ 有对有错，正确答案：' + labels; fbColor = '#f1c40f'; }
+      else { fb = '❌ 错误！正确答案：' + labels; }
+      q.choices.forEach(function(c) { if (c.correct && c.knowledge) fb += '<br><span style="color:#FFD700;font-size:12px;">📖 ' + c.knowledge + '</span>'; });
+      document.getElementById('question-feedback').innerHTML = '<div class="fade-in" style="color:' + fbColor + '">' + fb + '</div>';
+    } else {
+      _origCheck(q, singleBtn);
+    }
     var correctIdx = [];
     q.choices.forEach(function(c, i) { if (c.correct) correctIdx.push(i); });
     var allCorrect = userSel.length === correctIdx.length && correctIdx.every(function(ci) { return userSel.indexOf(ci) !== -1; });
@@ -498,22 +1269,42 @@ function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < al
     var gotSome = userSel.some(function(si) { return correctIdx.indexOf(si) !== -1; });
     var partial = gotSome && !allCorrect && !hasWrong;
     var point = allCorrect ? 10 : (partial ? 5 : 0);
+    if (typeof addGameScoreToTotal === 'function') addGameScoreToTotal(point);
     var knowledgeArr = [];
     q.choices.forEach(function(c) { if (c.correct && c.knowledge) knowledgeArr.push(c.knowledge); });
-    saveRecord({ professionId: CareerKey, eraId: ERA_KEYS[curRound], round: curRound + 1, subject: q.subject || '', text: q.text, correct: allCorrect, partial: partial, pointEarned: point, userAns: userSel, correctAns: correctIdx.slice(), choices: q.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }), knowledgeArr: knowledgeArr });
+    saveRecord({ professionId: _retrySingleMode ? '' : CareerKey, eraId: _retrySingleMode ? '' : ERA_KEYS[curRound], round: _retrySingleMode ? 0 : curRound + 1, subject: q.subject || '', text: q.text, correct: allCorrect, partial: partial, pointEarned: point, userAns: userSel, correctAns: correctIdx.slice(), choices: q.choices.map(function(c) { return { text: c.text, correct: c.correct, knowledge: c.knowledge || '' }; }), knowledgeArr: knowledgeArr });
   };
 })();
 
 (function() {
   var _origSubmit = submitFill;
   submitFill = function(q, userAnswer) {
-    var wasAnswered = answered;
-    _origSubmit(q, userAnswer);
-    if (!wasAnswered && answered && userAnswer) {
+    if (_retrySingleMode) {
+      // 重做模式：手动判题，不升级
+      if (answered || !userAnswer) return;
+      answered = true;
+      var grid = document.getElementById('options-grid');
+      var input = grid.querySelector('input');
+      if (input) input.disabled = true;
+      var btn = grid.querySelector('button');
+      if (btn) btn.style.display = 'none';
+      var acceptable = q.answers || [q.answer];
+      var isCorrect = false;
+      for (var i = 0; i < acceptable.length; i++) {
+        if (userAnswer.toLowerCase().replace(/\s/g, '') === acceptable[i].toLowerCase().replace(/\s/g, '')) { isCorrect = true; break; }
+      }
+      if (isCorrect) showFeedback('✅ 回答正确！', true);
+      else showFeedback('❌ 回答错误！正确答案是：' + q.answer, false);
+      document.getElementById('btn-next').disabled = false;
+    } else {
+      _origSubmit(q, userAnswer);
+    }
+    if (answered && userAnswer) {
       var acceptable = q.answers || [q.answer];
       var isCorrect = false;
       for (var i = 0; i < acceptable.length; i++) { if (userAnswer.toLowerCase().replace(/\s/g, '') === acceptable[i].toLowerCase().replace(/\s/g, '')) { isCorrect = true; break; } }
-      saveRecord({ professionId: CareerKey, eraId: ERA_KEYS[curRound], round: curRound + 1, subject: q.subject || '', text: q.text, correct: isCorrect, partial: false, pointEarned: isCorrect ? 5 : 0, userAns: [userAnswer], correctAns: [q.answer], choices: [], knowledgeArr: q.knowledge ? [q.knowledge] : [] });
+      var fillPoint = isCorrect ? 5 : 0;
+      if (typeof addGameScoreToTotal === 'function') addGameScoreToTotal(fillPoint);
     }
   };
 })();
@@ -547,13 +1338,116 @@ function loadRecordByTs(ts) { var all = loadAllRecords(); for (var i = 0; i < al
     document.getElementById('result-area').style.display = 'none';
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('career-select').style.display = 'block';
+    saveHighestOnly();
+    updateRecordDisplay();
   });
 })();
 
 function goBackToCareer() {
+  var ga = document.getElementById('game-area');
+  if (ga && ga.style.display !== 'none') {
+    if (_retrySingleMode) {
+      // 单题重做模式：退出恢复
+      _retrySingleMode = false;
+      onNextQuestion = _origOnNextQuestion || function(){};
+      if (_retrySingleBackup) {
+        document.getElementById('career-select').style.display = _retrySingleBackup.careerSelectDisplay || 'block';
+        document.getElementById('top-bar').style.display = '';
+        document.getElementById('btn-next').textContent = '下一题 ➤';
+        document.getElementById('btn-next').disabled = true;
+        _retrySingleBackup = null;
+      }
+      document.getElementById('game-area').style.display = 'none';
+      updateRecordDisplay();
+      renderWrongPanel();
+      return;
+    }
+    showSaveModal();
+    return;
+  }
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('result-area').style.display = 'none';
   document.getElementById('career-select').style.display = 'block';
+  updateRecordDisplay();
+}
+
+// --- 免责声明 / 玩法弹窗 ---
+var _disclaimerScrolled = false;
+var _disclaimerTimer = false;
+function showDisclaimer(skipTimer) {
+  document.getElementById('disclaimer-modal').classList.add('show');
+  var body = document.getElementById('disclaimer-body');
+  body.scrollTop = 0;
+  var hint = document.getElementById('disclaimer-hint');
+  var btn = document.getElementById('btn-acknowledge');
+  var progress = document.getElementById('disclaimer-progress-fill');
+  if (skipTimer) {
+    // 免验证模式：直接可关闭
+    _disclaimerScrolled = true;
+    _disclaimerTimer = true;
+    btn.disabled = false;
+    btn.classList.add('ready');
+    hint.textContent = '';
+    progress.style.width = '100%';
+  } else {
+    // 首次阅读模式：需滑到底 + 5秒
+    _disclaimerScrolled = false;
+    _disclaimerTimer = false;
+    btn.disabled = true;
+    btn.classList.remove('ready');
+    hint.textContent = '请向下滑动浏览全部内容';
+    progress.style.width = '0%';
+  }
+}
+function closeDisclaimer() {
+  if (!_disclaimerScrolled || !_disclaimerTimer) return;
+  document.getElementById('disclaimer-modal').classList.remove('show');
+  // 记录用户已同意，下次打开不再强制弹窗
+  var data = loadSaveData();
+  data.disclaimerAccepted = true;
+  writeSaveData(data);
+}
+function updateDisclaimerProgress() {
+  var body = document.getElementById('disclaimer-body');
+  var progress = body.scrollTop / (body.scrollHeight - body.clientHeight);
+  if (progress < 0) progress = 0;
+  if (progress > 1) progress = 1;
+  document.getElementById('disclaimer-progress-fill').style.width = (progress * 100) + '%';
+  // 滑到底部
+  if (progress >= 0.99 && !_disclaimerScrolled) {
+    _disclaimerScrolled = true;
+    document.getElementById('disclaimer-hint').textContent = '请稍候…（5秒后可确认）';
+    // 开始 5 秒倒计时
+    var countdown = 5;
+    var timer = setInterval(function() {
+      countdown--;
+      if (countdown > 0) {
+        document.getElementById('disclaimer-hint').textContent = '请稍候…（' + countdown + '秒后可确认）';
+      } else {
+        clearInterval(timer);
+        _disclaimerTimer = true;
+        document.getElementById('disclaimer-hint').textContent = '✓ 已阅读完毕';
+        document.getElementById('btn-acknowledge').disabled = false;
+        document.getElementById('btn-acknowledge').classList.add('ready');
+      }
+    }, 1000);
+  }
+}
+
+// 页面加载时迁移旧数据、显示历史记录、登录检测；首次访问才弹出免责声明
+function initOnLoad() {
+  migrateTotalStars();
+  updateAccountBar();
+  updateRecordDisplay();
+  var data = loadSaveData();
+  if (!data.disclaimerAccepted) {
+    showDisclaimer();
+  }
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initOnLoad);
+} else {
+  initOnLoad();
 }
 </script>
 
