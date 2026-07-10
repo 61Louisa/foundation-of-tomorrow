@@ -370,16 +370,20 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
   font-family:'DotGothic16','Microsoft YaHei',sans-serif}
 #login-accounts .la-item:hover{background:rgba(255,210,0,0.12);border-color:rgba(255,210,0,0.3);color:#ffd200}
 
-/* ---- 账户栏（职业选择页顶部） ---- */
+/* ---- 页面顶部账户栏 ---- */
 #account-bar{display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:10px;padding:6px 12px;background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.06);border-radius:8px;font-size:0.8rem}
+  margin-bottom:12px;padding:8px 14px;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);border-radius:10px;font-size:0.82rem}
 #account-bar .ab-user{color:#b0b8c8}
 #account-bar .ab-user strong{color:#ffd200}
-#account-bar .ab-btn{background:none;border:none;color:#666;cursor:pointer;
-  font-size:0.72rem;padding:2px 8px;border-radius:4px;transition:all 0.2s;
+#account-bar .ab-btn{background:none;border:none;cursor:pointer;font-size:0.75rem;
+  padding:4px 14px;border-radius:6px;transition:all 0.2s;
   font-family:'DotGothic16','Microsoft YaHei',sans-serif}
-#account-bar .ab-btn:hover{color:#e74c3c;background:rgba(231,76,60,0.1)}
+#account-bar .ab-btn.login{background:linear-gradient(135deg,#ffd200,#ff9a00);
+  color:#1a1a2e;font-weight:700}
+#account-bar .ab-btn.login:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(255,210,0,0.3)}
+#account-bar .ab-btn.switch{color:#666;border:1px solid rgba(255,255,255,0.1)}
+#account-bar .ab-btn.switch:hover{color:#ffd200;border-color:rgba(255,210,0,0.3);background:rgba(255,210,0,0.08)}
 
 /* ---- 账户切换确认弹窗 ---- */
 #switch-confirm-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:750;
@@ -427,12 +431,15 @@ body{background:#0a0a1a;color:#e0e0e0;font-family:'DotGothic16','Microsoft YaHei
   </div>
 </div>
 
+<!-- ===== 页面顶部账户栏 ===== -->
+<div id="account-bar" style="display:none">
+  <span class="ab-user">👤 <strong id="ab-username"></strong></span>
+  <button class="ab-btn login" id="ab-login-btn" onclick="showLoginModal()">登录</button>
+  <button class="ab-btn switch" id="ab-switch-btn" onclick="showLoginModal(true)" style="display:none">切换账号</button>
+</div>
+
 <!-- 职业选择 -->
 <div id="career-select">
-  <div id="account-bar" style="display:none">
-    <span class="ab-user">👤 <strong id="ab-username"></strong></span>
-    <button class="ab-btn" onclick="showLoginModal(true)">切换账号</button>
-  </div>
   <div id="title-display"></div>
   <div class="game-title">
     <div class="title-chinese">明日基石</div>
@@ -988,11 +995,17 @@ function updateAccountBar() {
   var name = getCurrentUser();
   var bar = document.getElementById('account-bar');
   var nameEl = document.getElementById('ab-username');
+  var loginBtn = document.getElementById('ab-login-btn');
+  var switchBtn = document.getElementById('ab-switch-btn');
+  bar.style.display = 'flex';
   if (name) {
-    bar.style.display = 'flex';
     nameEl.textContent = name;
+    loginBtn.style.display = 'none';
+    switchBtn.style.display = 'inline-block';
   } else {
-    bar.style.display = 'none';
+    nameEl.textContent = '未登录';
+    loginBtn.style.display = 'inline-block';
+    switchBtn.style.display = 'none';
   }
 }
 
